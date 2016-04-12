@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.2'
+
+    resourcePrefix 'homage_'
+
+    defaultConfig {
+        minSdkVersion 16
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    // Support Libraries
+    compile 'com.android.support:support-annotations:23.2.0'
+
+    // TODO: Parse manually? Not sure we need Gson for this
+    // Gson parser
+    compile 'com.google.code.gson:gson:2.6.2'
+}
