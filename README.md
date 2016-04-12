@@ -1,6 +1,6 @@
 [![Release](https://jitpack.io/v/com.github.oriley-me/homage.svg)](https://jitpack.io/#com.github.oriley-me/homage) [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0) [![Build Status](https://travis-ci.org/oriley-me/homage.svg?branch=master)](https://travis-ci.org/oriley-me/homage) [![Dependency Status](https://www.versioneye.com/user/projects/570cea97fcd19a00518553df/badge.svg?style=flat)](https://www.versioneye.com/user/projects/570cea97fcd19a00518553df)
 
-### TODO: Complete documentation (thank you for your patience). Please checkout the sample app to get an initial feel for the integration process.
+### TODO: Complete documentation (thank you for your patience). Please checkout the sample app to get an initial feel for the integration process, and look at `res/raw/licenses.json` for the expected format.
 
 # Homage
 ![Logo](artwork/icon.png)

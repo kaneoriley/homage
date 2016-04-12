@@ -1,1 +1,5 @@
 include ':homage-core', ':homage-recyclerview'
+
+if (!"true".equals(System.getenv("TRAVIS")) && !"true".equals(System.getenv("JITPACK"))) {
+    include ':homage-sample'
+}
