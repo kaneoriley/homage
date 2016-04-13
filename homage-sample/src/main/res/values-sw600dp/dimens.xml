@@ -17,14 +17,7 @@
 
 <resources>
 
-    <color name="color_primary">@color/md_red_500</color>
-    <color name="color_primary_dark">@color/md_red_700</color>
-    <color name="color_accent">@color/md_red_A200</color>
-
-    <color name="window_background">#fffafafa</color>
-
-    <color name="nav_drawer_header_gradient_start">@color/md_red_300</color>
-    <color name="nav_drawer_header_gradient_center">@color/md_red_500</color>
-    <color name="nav_drawer_header_gradient_end">@color/md_red_800</color>
+    <dimen name="splash_screen_logo_bottom">24.0dip</dimen>
+    <dimen name="splash_screen_brand_bottom">72.0dip</dimen>
 
 </resources>

@@ -22,5 +22,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="splash_screen_logo_bottom">16.0dip</dimen>
+    <dimen name="splash_screen_brand_bottom">64.0dip</dimen>
+
 </resources>
