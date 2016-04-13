@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *  You may obtain a copy of the License at
  *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -17,18 +17,23 @@
 package me.oriley.homage.recyclerview;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.ViewHolder;
+import me.oriley.homage.Homage;
 
-final class StringUtils {
-
-
-    private StringUtils() {
-        throw new IllegalAccessError("no instances");
-    }
-
+@SuppressWarnings("WeakerAccess")
+abstract class AbstractHomageAdapter<T extends ViewHolder> extends RecyclerView.Adapter<T> {
 
     @NonNull
-    static String nullToEmpty(@Nullable String value) {
-        return value != null ? value : "";
+    protected final Homage mHomage;
+
+
+    public AbstractHomageAdapter(@NonNull Homage homage) {
+        mHomage = homage;
+    }
+
+    @Override
+    public int getItemCount() {
+        return mHomage.getLibraries().size();
     }
 }

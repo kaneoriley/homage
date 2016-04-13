@@ -17,7 +17,7 @@
 
 <resources>
 
-    <color name="homage_library_view_license_background">#F5F5F5</color>
-    <color name="homage_library_view_divider">#B0BBC5</color>
+    <color name="homage_license_background">#F5F5F5</color>
+    <color name="homage_divider">#B0BBC5</color>
 
 </resources>

@@ -42,9 +42,9 @@ import static android.view.View.MeasureSpec.UNSPECIFIED;
 import static me.oriley.homage.recyclerview.StringUtils.nullToEmpty;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-public class HomageLibraryView extends CardView {
+public class HomageExpandableView extends CardView {
 
-    private static final String TAG = HomageLibraryView.class.getSimpleName();
+    private static final String TAG = HomageExpandableView.class.getSimpleName();
 
     private static final int EXPAND_ANIMATION_MILLIS = 250;
     private static final float CHEVRON_ROTATION_AMOUNT = 180f;
@@ -79,30 +79,30 @@ public class HomageLibraryView extends CardView {
     private boolean mAnimating;
 
 
-    public HomageLibraryView(@NonNull Context context) {
+    public HomageExpandableView(@NonNull Context context) {
         this(context, null);
     }
 
-    public HomageLibraryView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public HomageExpandableView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public HomageLibraryView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public HomageExpandableView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
     private void init(@NonNull Context context) {
-        View.inflate(context, R.layout.homage_library_view, this);
+        View.inflate(context, R.layout.homage_expandable_view, this);
 
-        mTitleView = (TextView) findViewById(R.id.homage_library_view_title_view);
-        mSummaryView = (TextView) findViewById(R.id.homage_library_view_summary_view);
-        mDescriptionView = (TextView) findViewById(R.id.homage_library_view_description_view);
-        mLicenseNameView = (TextView) findViewById(R.id.homage_library_view_license_name_view);
-        mLicenseDescriptionView = (TextView) findViewById(R.id.homage_library_view_license_description_view);
-        mExpandedContainer = (LinearLayout) findViewById(R.id.homage_library_view_expanded_container);
-        mChevronView = (ImageView) findViewById(R.id.homage_library_view_chevron_view);
-        mWebButton = (ImageView) findViewById(R.id.homage_library_view_web_button);
+        mTitleView = (TextView) findViewById(R.id.homage_expandable_view_title_view);
+        mSummaryView = (TextView) findViewById(R.id.homage_expandable_view_summary_view);
+        mDescriptionView = (TextView) findViewById(R.id.homage_expandable_view_description_view);
+        mLicenseNameView = (TextView) findViewById(R.id.homage_expandable_view_license_name_view);
+        mLicenseDescriptionView = (TextView) findViewById(R.id.homage_expandable_view_license_description_view);
+        mExpandedContainer = (LinearLayout) findViewById(R.id.homage_expandable_view_expanded_container);
+        mChevronView = (ImageView) findViewById(R.id.homage_expandable_view_chevron_view);
+        mWebButton = (ImageView) findViewById(R.id.homage_expandable_view_web_button);
 
         mTitleView.setTypeface(Typeface.DEFAULT_BOLD);
         mLicenseNameView.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);

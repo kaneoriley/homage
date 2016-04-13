@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String KEY_CURRENT_ITEM = "currentItem";
+    private static final int DEFAULT_ITEM = R.id.nav_expandable;
 
     @NonNull
     private FragmentManager mFragmentManager;
@@ -79,9 +80,9 @@ public class MainActivity extends AppCompatActivity
 
 
         if (savedInstanceState == null) {
-            onNavigationItemSelected(R.id.nav_demo);
+            onNavigationItemSelected(DEFAULT_ITEM);
         } else {
-            mCurrentItem = savedInstanceState.getInt(KEY_CURRENT_ITEM, R.id.nav_demo);
+            mCurrentItem = savedInstanceState.getInt(KEY_CURRENT_ITEM, DEFAULT_ITEM);
             mNavigationView.setCheckedItem(mCurrentItem);
         }
     }
@@ -109,8 +110,11 @@ public class MainActivity extends AppCompatActivity
     private boolean onNavigationItemSelected(int id) {
         // Handle navigation view item clicks here.
         switch (id) {
-            case R.id.nav_demo:
-                openDrawerFragment(DemoLicensesFragment.class, id);
+            case R.id.nav_expandable:
+                openDrawerFragment(ExpandableLicensesFragment.class, id);
+                break;
+            case R.id.nav_popup:
+                openDrawerFragment(PopupLicensesFragment.class, id);
                 break;
         }
 

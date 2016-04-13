@@ -24,7 +24,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="drawer_demo">Demo</string>
+    <string name="drawer_expandable">Expandable</string>
+    <string name="drawer_popup">Popup</string>
 
     <string name="license_oriley_name">The O\'Riley License (TM)</string>
     <string name="license_oriley_url">http://oriley.me</string>

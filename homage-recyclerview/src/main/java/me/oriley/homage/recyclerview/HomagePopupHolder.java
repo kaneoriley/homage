@@ -23,20 +23,20 @@ import android.view.View;
 import me.oriley.homage.Library;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
-public class HomageViewHolder extends RecyclerView.ViewHolder {
+public class HomagePopupHolder extends RecyclerView.ViewHolder {
 
     @NonNull
-    private final HomageLibraryView mLibraryView;
+    private final HomagePopupView mLibraryView;
 
 
-    public HomageViewHolder(@NonNull HomageLibraryView view) {
+    public HomagePopupHolder(@NonNull HomagePopupView view) {
         super(view);
         mLibraryView = view;
     }
 
 
     @NonNull
-    public HomageLibraryView getLibraryView() {
+    public HomagePopupView getLibraryView() {
         return mLibraryView;
     }
 
@@ -48,7 +48,7 @@ public class HomageViewHolder extends RecyclerView.ViewHolder {
         mLibraryView.setOnClickListener(listener);
     }
 
-    public void toggleExpanded() {
-        mLibraryView.toggleExpanded();
+    public void showPopup() {
+        mLibraryView.showPopup();
     }
 }

@@ -19,21 +19,22 @@ package me.oriley.homagesample;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import me.oriley.homage.recyclerview.HomageAdapter;
+import me.oriley.homage.Homage;
+import me.oriley.homage.recyclerview.HomagePopupAdapter;
 
 @SuppressWarnings("WeakerAccess")
-public final class DemoLicensesFragment extends RecyclerViewFragment {
+public final class PopupLicensesFragment extends RecyclerViewFragment {
 
     @NonNull
     @Override
     public RecyclerView.Adapter createAdapter() {
-        HomageAdapter adapter = new HomageAdapter(getActivity(), R.raw.licenses);
+        Homage homage = new Homage(getActivity(), R.raw.licenses);
 
         // Adds a custom license definition to enable matching in your JSON list
-        adapter.addLicense("oriley", R.string.license_oriley_name, R.string.license_oriley_url, R.string.license_oriley_description);
+        homage.addLicense("oriley", R.string.license_oriley_name, R.string.license_oriley_url, R.string.license_oriley_description);
+        homage.refreshLibraries();
 
-        adapter.refresh();
-        return adapter;
+        return new HomagePopupAdapter(homage);
     }
 
     @NonNull
