@@ -123,10 +123,10 @@ repositories {
 ```gradle
 dependencies {
     // Required
-    compile 'me.oriley.homage:homage-core:0.0.1'
+    compile 'me.oriley.homage:homage-core:0.0.2'
 
     // Optional, only needed if you want to use the included widgets instead of rolling your own
-    compile 'me.oriley.homage:homage-recyclerview:0.0.1'
+    compile 'me.oriley.homage:homage-recyclerview:0.0.2'
 }
 ```
 
