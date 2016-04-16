@@ -116,6 +116,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_popup:
                 openDrawerFragment(PopupLicensesFragment.class, id);
                 break;
+            case R.id.nav_icon:
+                openDrawerFragment(IconLicensesFragment.class, id);
+                break;
         }
 
         closeDrawer();

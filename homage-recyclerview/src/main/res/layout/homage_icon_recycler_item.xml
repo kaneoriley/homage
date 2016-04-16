@@ -15,21 +15,14 @@
   ~ limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <group android:checkableBehavior="single">
-        <item
-                android:id="@+id/nav_expandable"
-                android:icon="@drawable/ic_stars"
-                android:title="@string/drawer_expandable"/>
-        <item
-                android:id="@+id/nav_popup"
-                android:icon="@drawable/ic_stars"
-                android:title="@string/drawer_popup"/>
-        <item
-                android:id="@+id/nav_icon"
-                android:icon="@drawable/ic_stars"
-                android:title="@string/drawer_icon"/>
-    </group>
-
-</menu>
+<me.oriley.homage.recyclerview.HomageIconView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="@dimen/homage_recycler_item_content_padding"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardElevation="@dimen/homage_recycler_item_elevation"
+        app:cardCornerRadius="@dimen/homage_recycler_item_corner_radius"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"/>

@@ -25,6 +25,7 @@ import android.support.annotation.StringRes;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.SpannedString;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ import java.util.*;
 
 import static java.util.Locale.US;
 import static me.oriley.homage.Homage.CoreLicense.*;
+import static me.oriley.homage.HomageUtils.getResourceId;
 import static me.oriley.homage.HomageUtils.parseLibraries;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
@@ -110,8 +112,18 @@ public final class Homage {
             } else {
                 license = mLicenses.get(UNKNOWN.name().toLowerCase(US));
             }
-
             library.setLicense(license);
+
+            int iconRes = -1;
+            String icon = library.getLibraryIcon();
+            if (!TextUtils.isEmpty(icon)) {
+                iconRes = getResourceId(mContext, icon, "drawable");
+                if (iconRes <= 0) {
+                    iconRes = getResourceId(mContext, icon, "mipmap");
+                }
+            }
+            library.setIconResource(iconRes);
+
             mLibraries.add(library);
         }
     }

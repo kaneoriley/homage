@@ -16,6 +16,7 @@
 
 package me.oriley.homage;
 
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Spanned;
@@ -25,36 +26,44 @@ public final class Library {
 
     // "name"
     @Nullable
-    String mLibraryName;
+    private final String mLibraryName;
+
+    // "icon"
+    @Nullable
+    private final String mLibraryIcon;
 
     // "version"
     @Nullable
-    String mLibraryVersion;
+    private final String mLibraryVersion;
 
     // "description"
     @Nullable
-    String mLibraryDescription;
+    private final String mLibraryDescription;
 
     // "year"
     @Nullable
-    String mLibraryYear;
+    private final String mLibraryYear;
 
     // "owner"
     @Nullable
-    String mLibraryOwner;
+    private final String mLibraryOwner;
 
     // "url"
     @Nullable
-    String mLibraryUrl;
+    private final String mLibraryUrl;
 
     // "license"
     @Nullable
-    String mLicenseCode;
+    private final String mLicenseCode;
 
     private License mLicense;
 
+    @DrawableRes
+    private int mIconResource;
+
 
     Library(@Nullable String name,
+            @Nullable String icon,
             @Nullable String version,
             @Nullable String description,
             @Nullable String year,
@@ -62,6 +71,7 @@ public final class Library {
             @Nullable String url,
             @Nullable String license) {
         mLibraryName = name;
+        mLibraryIcon = icon;
         mLibraryVersion = version;
         mLibraryDescription = description;
         mLibraryYear = year;
@@ -74,6 +84,11 @@ public final class Library {
     @Nullable
     public String getLibraryName() {
         return mLibraryName;
+    }
+
+    @Nullable
+    public String getLibraryIcon() {
+        return mLibraryIcon;
     }
 
     @Nullable
@@ -106,10 +121,19 @@ public final class Library {
         return mLicenseCode;
     }
 
+    @DrawableRes
+    public int getIconResource() {
+        return mIconResource;
+    }
+
     @NonNull
     public License getLicense() {
         validateLicense();
         return mLicense;
+    }
+
+    void setIconResource(@DrawableRes int iconResource) {
+        mIconResource = iconResource;
     }
 
     void setLicense(@NonNull License license) {

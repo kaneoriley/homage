@@ -50,6 +50,9 @@ public String getLicenseUrl();
 
 // Note: The description is returned as a spanned to support HTML formatting
 public Spanned getLicenseDescription();
+
+// Will return a drawable resource ID, or -1 if no valid value is set
+public int getIconResource();
 ```
 
 ## Included Adapters
@@ -83,6 +86,7 @@ The required format for the JSON file you pass to Homage is as follows:
   "licenses": [
     {
       "name": "Power Adapters",
+      "icon": "library_power_adapters",
       "version": "0.9.0",
       "year": "2016",
       "owner": "NextFaze",
@@ -103,6 +107,9 @@ The required format for the JSON file you pass to Homage is as follows:
 }
 ```
 
+The `icon` field is the name of a drawable resource included in your application. If the specified name is invalid,
+the value of `library.getIconResource()` will be `-1`, otherwise it will be the resource ID of the drawable.
+ 
 The following are valid values for the `license` field: "cc0", "cc3", "apache2", "bsd2", "bsd3", "lgpl3", "mit"
 
 If you need to include any custom licenses, then enter the key you use to add the license to your `Homage`

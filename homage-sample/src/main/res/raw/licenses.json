@@ -19,40 +19,54 @@
       "license": "apache2"
     },
     {
-      "name": "Rebound",
-      "version": "0.3.6",
+      "name": "Bunyan",
+      "icon": "library_bunyan",
+      "version": "0.1.1",
       "year": "2016",
-      "owner": "Facebook",
-      "description": "Rebound is a java library that models spring dynamics. Rebound spring models can be used to create animations that feel natural by introducing real world physics to your application.",
-      "url": "http://facebook.github.io/rebound/",
-      "license": "bsd2"
+      "owner": "O'Riley ME",
+      "description": "Logback/SLF4J wrapper with basic LogCat appender.",
+      "url": "https://github.com/oriley-me/bunyan",
+      "license": "apache2"
     },
     {
-      "name": "User Avatars Pack",
-      "version": "1.0",
+      "name": "Cutlass",
+      "icon": "library_cutlass",
+      "version": "0.1b",
       "year": "2016",
-      "owner": "Freepick",
-      "description": "User avatars collection for including in your application.",
-      "url": "http://www.freepik.com",
-      "license": "cc3"
+      "owner": "O'Riley ME",
+      "description": "Dagger 2 component generator and injection helper.",
+      "url": "https://github.com/oriley-me/cutlass",
+      "license": "apache2"
     },
     {
-      "name": "AndroidCountryPicker",
-      "version": "1.0",
-      "year": "2014",
-      "owner": "Roomorama",
-      "description": "CountryPicker is a simple fragment that can be embedded or shown as dialog. See the example to see more detail.",
-      "url": "https://github.com/roomorama/AndroidCountryPicker",
-      "license": "mit"
+      "name": "Crate",
+      "icon": "library_crate",
+      "version": "0.4.1",
+      "year": "2016",
+      "owner": "O'Riley ME",
+      "description": "Compile time safety for Android assets.",
+      "url": "https://github.com/oriley-me/crate",
+      "license": "apache2"
     },
     {
-      "name": "Encryption",
-      "version": "1.2.0",
+      "name": "Homage",
+      "icon": "library_homage",
+      "version": "0.0.2",
       "year": "2016",
-      "owner": "simbiose",
-      "description": "Encryption is a simple way to create encrypted strings to Android project.",
-      "url": "https://github.com/simbiose/Encryption",
-      "license": "lgpl3"
+      "owner": "O'Riley ME",
+      "description": "Simple way to include open source licenses in your application.",
+      "url": "https://github.com/oriley-me/homage",
+      "license": "apache2"
+    },
+    {
+      "name": "Twiddle",
+      "icon": "library_twiddle",
+      "version": "0.1",
+      "year": "2016",
+      "owner": "O'Riley ME",
+      "description": "Lazy loader and caching library.",
+      "url": "https://github.com/oriley-me/twiddle",
+      "license": "apache2"
     },
     {
       "name": "My Next Project",
@@ -80,24 +94,6 @@
       "license": "oriley"
     },
     {
-      "name": "Power Adapters",
-      "version": "0.9.0",
-      "year": "2016",
-      "owner": "NextFaze",
-      "description": "Universal Android adapter interface combined with a collection of utility adapters like headers, loading indicators, and dividers.",
-      "url": "https://github.com/NextFaze/power-adapters",
-      "license": "apache2"
-    },
-    {
-      "name": "Power Data",
-      "version": "0.4.0",
-      "year": "2016",
-      "owner": "NextFaze",
-      "description": "Simplifies loading and management of asynchronous lists by encapsulating relevant states in a single interface.",
-      "url": "https://github.com/NextFaze/power-data",
-      "license": "apache2"
-    },
-    {
       "name": "Rebound",
       "version": "0.3.6",
       "year": "2016",
@@ -132,267 +128,6 @@
       "description": "Encryption is a simple way to create encrypted strings to Android project.",
       "url": "https://github.com/simbiose/Encryption",
       "license": "lgpl3"
-    },
-    {
-      "name": "My Next Project",
-      "version": "-0.1",
-      "year": "2017",
-      "owner": "O'Riley ME",
-      "description": "Here is an example of using a custom license model, which I've injected from within the sample app.",
-      "url": "https://github.com/oriley-me",
-      "license": "oriley"
-    },
-    {
-      "name": "Power Adapters",
-      "version": "0.9.0",
-      "year": "2016",
-      "owner": "NextFaze",
-      "description": "Universal Android adapter interface combined with a collection of utility adapters like headers, loading indicators, and dividers.",
-      "url": "https://github.com/NextFaze/power-adapters",
-      "license": "apache2"
-    },
-    {
-      "name": "Power Data",
-      "version": "0.4.0",
-      "year": "2016",
-      "owner": "NextFaze",
-      "description": "Simplifies loading and management of asynchronous lists by encapsulating relevant states in a single interface.",
-      "url": "https://github.com/NextFaze/power-data",
-      "license": "apache2"
-    },
-    {
-      "name": "Rebound",
-      "version": "0.3.6",
-      "year": "2016",
-      "owner": "Facebook",
-      "description": "Rebound is a java library that models spring dynamics. Rebound spring models can be used to create animations that feel natural by introducing real world physics to your application.",
-      "url": "http://facebook.github.io/rebound/",
-      "license": "bsd2"
-    },
-    {
-      "name": "User Avatars Pack",
-      "version": "1.0",
-      "year": "2016",
-      "owner": "Freepick",
-      "description": "User avatars collection for including in your application.",
-      "url": "http://www.freepik.com",
-      "license": "cc3"
-    },
-    {
-      "name": "AndroidCountryPicker",
-      "version": "1.0",
-      "year": "2014",
-      "owner": "Roomorama",
-      "description": "CountryPicker is a simple fragment that can be embedded or shown as dialog. See the example to see more detail.",
-      "url": "https://github.com/roomorama/AndroidCountryPicker",
-      "license": "mit"
-    },
-    {
-      "name": "Encryption",
-      "version": "1.2.0",
-      "year": "2016",
-      "owner": "simbiose",
-      "description": "Encryption is a simple way to create encrypted strings to Android project.",
-      "url": "https://github.com/simbiose/Encryption",
-      "license": "lgpl3"
-    },
-    {
-      "name": "My Next Project",
-      "version": "-0.1",
-      "year": "2017",
-      "owner": "O'Riley ME",
-      "description": "Here is an example of using a custom license model, which I've injected from within the sample app.",
-      "url": "https://github.com/oriley-me",
-      "license": "oriley"
-    },
-    {
-      "name": "Power Adapters",
-      "version": "0.9.0",
-      "year": "2016",
-      "owner": "NextFaze",
-      "description": "Universal Android adapter interface combined with a collection of utility adapters like headers, loading indicators, and dividers.",
-      "url": "https://github.com/NextFaze/power-adapters",
-      "license": "apache2"
-    },
-    {
-      "name": "Power Data",
-      "version": "0.4.0",
-      "year": "2016",
-      "owner": "NextFaze",
-      "description": "Simplifies loading and management of asynchronous lists by encapsulating relevant states in a single interface.",
-      "url": "https://github.com/NextFaze/power-data",
-      "license": "apache2"
-    },
-    {
-      "name": "Rebound",
-      "version": "0.3.6",
-      "year": "2016",
-      "owner": "Facebook",
-      "description": "Rebound is a java library that models spring dynamics. Rebound spring models can be used to create animations that feel natural by introducing real world physics to your application.",
-      "url": "http://facebook.github.io/rebound/",
-      "license": "bsd2"
-    },
-    {
-      "name": "User Avatars Pack",
-      "version": "1.0",
-      "year": "2016",
-      "owner": "Freepick",
-      "description": "User avatars collection for including in your application.",
-      "url": "http://www.freepik.com",
-      "license": "cc3"
-    },
-    {
-      "name": "AndroidCountryPicker",
-      "version": "1.0",
-      "year": "2014",
-      "owner": "Roomorama",
-      "description": "CountryPicker is a simple fragment that can be embedded or shown as dialog. See the example to see more detail.",
-      "url": "https://github.com/roomorama/AndroidCountryPicker",
-      "license": "mit"
-    },
-    {
-      "name": "Encryption",
-      "version": "1.2.0",
-      "year": "2016",
-      "owner": "simbiose",
-      "description": "Encryption is a simple way to create encrypted strings to Android project.",
-      "url": "https://github.com/simbiose/Encryption",
-      "license": "lgpl3"
-    },
-    {
-      "name": "My Next Project",
-      "version": "-0.1",
-      "year": "2017",
-      "owner": "O'Riley ME",
-      "description": "Here is an example of using a custom license model, which I've injected from within the sample app.",
-      "url": "https://github.com/oriley-me",
-      "license": "oriley"
-    },
-    {
-      "name": "Power Adapters",
-      "version": "0.9.0",
-      "year": "2016",
-      "owner": "NextFaze",
-      "description": "Universal Android adapter interface combined with a collection of utility adapters like headers, loading indicators, and dividers.",
-      "url": "https://github.com/NextFaze/power-adapters",
-      "license": "apache2"
-    },
-    {
-      "name": "Power Data",
-      "version": "0.4.0",
-      "year": "2016",
-      "owner": "NextFaze",
-      "description": "Simplifies loading and management of asynchronous lists by encapsulating relevant states in a single interface.",
-      "url": "https://github.com/NextFaze/power-data",
-      "license": "apache2"
-    },
-    {
-      "name": "Rebound",
-      "version": "0.3.6",
-      "year": "2016",
-      "owner": "Facebook",
-      "description": "Rebound is a java library that models spring dynamics. Rebound spring models can be used to create animations that feel natural by introducing real world physics to your application.",
-      "url": "http://facebook.github.io/rebound/",
-      "license": "bsd2"
-    },
-    {
-      "name": "User Avatars Pack",
-      "version": "1.0",
-      "year": "2016",
-      "owner": "Freepick",
-      "description": "User avatars collection for including in your application.",
-      "url": "http://www.freepik.com",
-      "license": "cc3"
-    },
-    {
-      "name": "AndroidCountryPicker",
-      "version": "1.0",
-      "year": "2014",
-      "owner": "Roomorama",
-      "description": "CountryPicker is a simple fragment that can be embedded or shown as dialog. See the example to see more detail.",
-      "url": "https://github.com/roomorama/AndroidCountryPicker",
-      "license": "mit"
-    },
-    {
-      "name": "Encryption",
-      "version": "1.2.0",
-      "year": "2016",
-      "owner": "simbiose",
-      "description": "Encryption is a simple way to create encrypted strings to Android project.",
-      "url": "https://github.com/simbiose/Encryption",
-      "license": "lgpl3"
-    },
-    {
-      "name": "My Next Project",
-      "version": "-0.1",
-      "year": "2017",
-      "owner": "O'Riley ME",
-      "description": "Here is an example of using a custom license model, which I've injected from within the sample app.",
-      "url": "https://github.com/oriley-me",
-      "license": "oriley"
-    },
-    {
-      "name": "Power Adapters",
-      "version": "0.9.0",
-      "year": "2016",
-      "owner": "NextFaze",
-      "description": "Universal Android adapter interface combined with a collection of utility adapters like headers, loading indicators, and dividers.",
-      "url": "https://github.com/NextFaze/power-adapters",
-      "license": "apache2"
-    },
-    {
-      "name": "Power Data",
-      "version": "0.4.0",
-      "year": "2016",
-      "owner": "NextFaze",
-      "description": "Simplifies loading and management of asynchronous lists by encapsulating relevant states in a single interface.",
-      "url": "https://github.com/NextFaze/power-data",
-      "license": "apache2"
-    },
-    {
-      "name": "Rebound",
-      "version": "0.3.6",
-      "year": "2016",
-      "owner": "Facebook",
-      "description": "Rebound is a java library that models spring dynamics. Rebound spring models can be used to create animations that feel natural by introducing real world physics to your application.",
-      "url": "http://facebook.github.io/rebound/",
-      "license": "bsd2"
-    },
-    {
-      "name": "User Avatars Pack",
-      "version": "1.0",
-      "year": "2016",
-      "owner": "Freepick",
-      "description": "User avatars collection for including in your application.",
-      "url": "http://www.freepik.com",
-      "license": "cc3"
-    },
-    {
-      "name": "AndroidCountryPicker",
-      "version": "1.0",
-      "year": "2014",
-      "owner": "Roomorama",
-      "description": "CountryPicker is a simple fragment that can be embedded or shown as dialog. See the example to see more detail.",
-      "url": "https://github.com/roomorama/AndroidCountryPicker",
-      "license": "mit"
-    },
-    {
-      "name": "Encryption",
-      "version": "1.2.0",
-      "year": "2016",
-      "owner": "simbiose",
-      "description": "Encryption is a simple way to create encrypted strings to Android project.",
-      "url": "https://github.com/simbiose/Encryption",
-      "license": "lgpl3"
-    },
-    {
-      "name": "My Next Project",
-      "version": "-0.1",
-      "year": "2017",
-      "owner": "O'Riley ME",
-      "description": "Here is an example of using a custom license model, which I've injected from within the sample app.",
-      "url": "https://github.com/oriley-me",
-      "license": "oriley"
     }
   ]
 }
