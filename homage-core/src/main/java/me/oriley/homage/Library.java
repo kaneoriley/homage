@@ -16,40 +16,79 @@
 
 package me.oriley.homage;
 
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Spanned;
-import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
 public final class Library {
 
-    @SerializedName("name")
-    String mLibraryName;
+    // "name"
+    @Nullable
+    private final String mLibraryName;
 
-    @SerializedName("version")
-    String mLibraryVersion;
+    // "icon"
+    @Nullable
+    private final String mLibraryIcon;
 
-    @SerializedName("description")
-    String mLibraryDescription;
+    // "version"
+    @Nullable
+    private final String mLibraryVersion;
 
-    @SerializedName("year")
-    String mLibraryYear;
+    // "description"
+    @Nullable
+    private final String mLibraryDescription;
 
-    @SerializedName("owner")
-    String mLibraryOwner;
+    // "year"
+    @Nullable
+    private final String mLibraryYear;
 
-    @SerializedName("url")
-    String mLibraryUrl;
+    // "owner"
+    @Nullable
+    private final String mLibraryOwner;
 
-    @SerializedName("license")
-    String mLicenseCode;
+    // "url"
+    @Nullable
+    private final String mLibraryUrl;
+
+    // "license"
+    @Nullable
+    private final String mLicenseCode;
 
     private License mLicense;
+
+    @DrawableRes
+    private int mIconResource;
+
+
+    Library(@Nullable String name,
+            @Nullable String icon,
+            @Nullable String version,
+            @Nullable String description,
+            @Nullable String year,
+            @Nullable String owner,
+            @Nullable String url,
+            @Nullable String license) {
+        mLibraryName = name;
+        mLibraryIcon = icon;
+        mLibraryVersion = version;
+        mLibraryDescription = description;
+        mLibraryYear = year;
+        mLibraryOwner = owner;
+        mLibraryUrl = url;
+        mLicenseCode = license;
+    }
+
 
     @Nullable
     public String getLibraryName() {
         return mLibraryName;
+    }
+
+    @Nullable
+    public String getLibraryIcon() {
+        return mLibraryIcon;
     }
 
     @Nullable
@@ -77,15 +116,24 @@ public final class Library {
         return mLibraryUrl;
     }
 
-    @NonNull
+    @Nullable
     public String getLicenseCode() {
         return mLicenseCode;
+    }
+
+    @DrawableRes
+    public int getIconResource() {
+        return mIconResource;
     }
 
     @NonNull
     public License getLicense() {
         validateLicense();
         return mLicense;
+    }
+
+    void setIconResource(@DrawableRes int iconResource) {
+        mIconResource = iconResource;
     }
 
     void setLicense(@NonNull License license) {

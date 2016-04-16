@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 Kane O'Riley
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License")
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="UselessParent">
+
+            <ImageView
+                    android:id="@+id/homage_view_icon"
+                    android:layout_width="@android:dimen/app_icon_size"
+                    android:layout_height="@android:dimen/app_icon_size"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/homage_recycler_item_content_padding"
+                    tools:ignore="ContentDescription"/>
+
+            <TextView
+                    android:id="@+id/homage_view_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/homage_view_icon"
+                    android:layout_toLeftOf="@+id/homage_view_web_button"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    tools:ignore="RtlHardcoded" />
+
+            <TextView
+                    android:id="@+id/homage_view_summary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/homage_view_title"
+                    android:layout_toRightOf="@+id/homage_view_icon"
+                    android:layout_toLeftOf="@id/homage_view_web_button"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    tools:ignore="RtlHardcoded" />
+
+            <ImageView
+                    style="@style/HomageButtonView"
+                    android:id="@id/homage_view_web_button"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/homage_view_chevron_container"
+                    android:padding="6dp"
+                    android:src="@drawable/homage_ic_link"
+                    android:background="?android:attr/selectableItemBackground"
+                    tools:ignore="ContentDescription,RtlHardcoded" />
+
+            <FrameLayout
+                    android:id="@+id/homage_view_chevron_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true">
+
+                <ImageView
+                        android:id="@+id/homage_view_chevron"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/homage_down_chevron"
+                        tools:ignore="ContentDescription,RtlHardcoded" />
+
+            </FrameLayout>
+
+        </RelativeLayout>
+
+        <FrameLayout
+                android:id="@+id/homage_view_expanded_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</merge>

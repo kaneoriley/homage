@@ -1,12 +1,13 @@
-[![Release](https://jitpack.io/v/com.github.oriley-me/homage.svg)](https://jitpack.io/#com.github.oriley-me/homage) [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0) [![Build Status](https://travis-ci.org/oriley-me/homage.svg?branch=master)](https://travis-ci.org/oriley-me/homage) [![Dependency Status](https://www.versioneye.com/user/projects/570cea97fcd19a00518553df/badge.svg?style=flat)](https://www.versioneye.com/user/projects/570cea97fcd19a00518553df)
+[![Release](https://jitpack.io/v/com.github.oriley-me/homage.svg)](https://jitpack.io/#com.github.oriley-me/homage) [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0) [![Build Status](https://travis-ci.org/oriley-me/homage.svg?branch=master)](https://travis-ci.org/oriley-me/homage) [![Dependency Status](https://www.versioneye.com/user/projects/570cea97fcd19a00518553df/badge.svg?style=flat)](https://www.versioneye.com/user/projects/570cea97fcd19a00518553df)<br/>
+<a href="http://www.methodscount.com/?lib=me.oriley.homage%3Ahomage-core%3A0.1.0"><img src="https://img.shields.io/badge/homage_core-methods: 97 | deps: 20 | size: 15 KB-f44336.svg"></img></a> <a href="http://www.methodscount.com/?lib=me.oriley.homage%3Ahomage-recyclerview%3A0.1.0"><img src="https://img.shields.io/badge/homage_recyclerview-methods: 146 | deps: 11757 | size: 18 KB-f44336.svg"></img></a>
 
 # Homage
 ![Logo](artwork/icon.png)
 
 Homage is a simple library, designed to make it more enjoyable (or less obnoxious, depending on your viewpoint) to
 include open source licenses for all your used libraries. Features a very simple JSON interface, support for loading
-from either assets or a raw resource, and the `homage-recyclerview` module includes some predefined adapters and custom
-views for you to use straight away in your app.
+from either assets or a raw resource, and the `homage-recyclerview` module includes some predefined widgets for you to
+use straight away in your app.
 
 ## Usage
 
@@ -50,24 +51,36 @@ public String getLicenseUrl();
 
 // Note: The description is returned as a spanned to support HTML formatting
 public Spanned getLicenseDescription();
+
+// Will return a drawable resource ID, or -1 if no valid value is set
+public int getIconResource();
 ```
 
 ## Included Adapters
 
-The add-on module `homage-recyclerview` contains some extra adapters you can use to handle all the view binding
-and library display logic (you can see them for yourself in the sample application).
-
-`HomageExpandableAdapter`: CardView that expands height when pressed to show license details
-`HomagePopupAdapter`: Simple view that shows a popup dialog containing license details when pressed
-
-To use these, all you need is a preconfigured `Homage` instance, and a `RecyclerView` to set the adapter to:
+The add-on module `homage-recyclerview` contains a simple adapter you can use to handle all the view binding
+and library display logic (you can check it out for yourself in the sample application). The constructor takes three
+parameters, a `Homage` instance, the extra info display mode, and whether or not to show icons. Some examples (all used
+in the sample application):
 
 ```java
-mRecyclerView.setAdapter(new HomageExpandableAdapter(mHomage));
+// Expandable views with icons
+HomageAdapter homageAdapter = new HomageAdapter(mHomage, HomageView.ExtraInfoMode.EXPANDABLE, true);
 
-// OR
+// Popup views with icons
+HomageAdapter homageAdapter = new HomageAdapter(mHomage, HomageView.ExtraInfoMode.POPUP, true);
 
-mRecyclerView.setAdapter(new HomagePopupAdapter(mHomage));
+// Expandable views with no icons
+HomageAdapter homageAdapter = new HomageAdapter(mHomage, HomageView.ExtraInfoMode.EXPANDABLE, false);
+
+// Popup views with no icons
+HomageAdapter homageAdapter = new HomageAdapter(mHomage, HomageView.ExtraInfoMode.POPUP, false);
+```
+
+Now all you need is a `RecyclerView` to set the adapter to:
+
+```java
+mRecyclerView.setAdapter(homageAdapter);
 ```
 
 Simple, no?
@@ -83,6 +96,7 @@ The required format for the JSON file you pass to Homage is as follows:
   "licenses": [
     {
       "name": "Power Adapters",
+      "icon": "library_power_adapters",
       "version": "0.9.0",
       "year": "2016",
       "owner": "NextFaze",
@@ -103,6 +117,9 @@ The required format for the JSON file you pass to Homage is as follows:
 }
 ```
 
+The `icon` field is the name of a drawable resource included in your application. If the specified name is invalid,
+the value of `library.getIconResource()` will be `-1`, otherwise it will be the resource ID of the drawable.
+ 
 The following are valid values for the `license` field: "cc0", "cc3", "apache2", "bsd2", "bsd3", "lgpl3", "mit"
 
 If you need to include any custom licenses, then enter the key you use to add the license to your `Homage`
@@ -123,10 +140,10 @@ repositories {
 ```gradle
 dependencies {
     // Required
-    compile 'me.oriley.homage:homage-core:0.0.2'
+    compile 'me.oriley.homage:homage-core:0.1.0'
 
     // Optional, only needed if you want to use the included widgets instead of rolling your own
-    compile 'me.oriley.homage:homage-recyclerview:0.0.2'
+    compile 'me.oriley.homage:homage-recyclerview:0.1.0'
 }
 ```
 

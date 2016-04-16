@@ -25,25 +25,23 @@ import android.support.annotation.StringRes;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.SpannedString;
+import android.text.TextUtils;
 import android.util.Log;
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.*;
 
 import static java.util.Locale.US;
 import static me.oriley.homage.Homage.CoreLicense.*;
-import static me.oriley.homage.ReaderUtils.closeQuietly;
+import static me.oriley.homage.HomageUtils.getResourceId;
+import static me.oriley.homage.HomageUtils.parseLibraries;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public final class Homage {
 
     public enum CoreLicense {
-        CC0, CC3, APACHE2, BSD2, BSD3, LGPL3, MIT, UNKNOWN
+        CC0, CC3, APACHE2, BSD2, BSD3, LGPL3, MIT, UNRECOGNISED, NONE
     }
 
     private static final String TAG = Homage.class.getSimpleName();
@@ -75,7 +73,8 @@ public final class Homage {
         addLicense(BSD3, R.string.homage_license_bsd_3_licenseName, R.string.homage_license_bsd_3_licenseWebsite, R.string.homage_license_bsd_3_licenseDescription);
         addLicense(LGPL3, R.string.homage_license_lgpl_3_0_licenseName, R.string.homage_license_lgpl_3_0_licenseWebsite, R.string.homage_license_lgpl_3_0_licenseDescription);
         addLicense(MIT, R.string.homage_license_mit_licenseName, R.string.homage_license_mit_licenseWebsite, R.string.homage_license_mit_licenseDescription);
-        addLicense(UNKNOWN, R.string.homage_empty_license, R.string.homage_empty_license, R.string.homage_unrecognised_license);
+        addLicense(UNRECOGNISED, R.string.homage_empty_license, R.string.homage_empty_license, R.string.homage_unrecognised_license);
+        addLicense(NONE, R.string.homage_empty_license, R.string.homage_empty_license, R.string.homage_empty_license);
     }
 
     public Homage(@NonNull Context context, @RawRes int licensesResourceId) {
@@ -109,13 +108,30 @@ public final class Homage {
             String licenseCode = library.getLicenseCode();
 
             License license;
-            if (mLicenses.containsKey(licenseCode)) {
-                license = mLicenses.get(licenseCode);
+            if (!TextUtils.isEmpty(licenseCode)) {
+                if (mLicenses.containsKey(licenseCode)) {
+                    license = mLicenses.get(licenseCode);
+                } else {
+                    license = mLicenses.get(UNRECOGNISED.name().toLowerCase(US));
+                }
             } else {
-                license = mLicenses.get(UNKNOWN.name().toLowerCase(US));
+                license = mLicenses.get(NONE.name().toLowerCase(US));
             }
-
             library.setLicense(license);
+
+            int iconRes = -1;
+            String icon = library.getLibraryIcon();
+            if (!TextUtils.isEmpty(icon)) {
+                iconRes = getResourceId(mContext, icon, "drawable");
+                if (iconRes <= 0) {
+                    iconRes = getResourceId(mContext, icon, "mipmap");
+                }
+                if (iconRes <= 0) {
+                    iconRes = android.R.drawable.sym_def_app_icon;
+                }
+            }
+            library.setIconResource(iconRes);
+
             mLibraries.add(library);
         }
     }
@@ -149,7 +165,7 @@ public final class Homage {
     private static Library[] getLibraryArray(@NonNull Context context, @RawRes int rawResourceId) {
         try {
             InputStream stream = context.getResources().openRawResource(rawResourceId);
-            return getLibraries(stream);
+            return parseLibraries(stream);
         } catch (Resources.NotFoundException e) {
             Log.e(TAG, "NotFoundException reading license file: " + rawResourceId, e);
             return null;
@@ -160,26 +176,10 @@ public final class Homage {
     private static Library[] getLibraryArray(@NonNull Context context, @NonNull String assetPath) {
         try {
             InputStream stream = context.getAssets().open(assetPath);
-            return getLibraries(stream);
+            return parseLibraries(stream);
         } catch (IOException e) {
             Log.e(TAG, "IOException reading license file: " + assetPath, e);
             return null;
-        }
-    }
-
-    @Nullable
-    private static Library[] getLibraries(@NonNull InputStream inputStream) {
-        InputStreamReader reader = null;
-        try {
-            Gson gson = new Gson();
-            reader = new InputStreamReader(inputStream);
-            HomageModel model = gson.fromJson(reader, HomageModel.class);
-            return model.getLibraries();
-        } catch (JsonIOException | JsonSyntaxException e) {
-            Log.e(TAG, "Exception parsing JSON", e);
-            return null;
-        } finally {
-            closeQuietly(reader);
         }
     }
 }
