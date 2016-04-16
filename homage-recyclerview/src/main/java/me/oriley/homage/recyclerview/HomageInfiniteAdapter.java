@@ -17,23 +17,26 @@
 package me.oriley.homage.recyclerview;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import me.oriley.homage.Homage;
+import me.oriley.homage.Library;
+import me.oriley.homage.recyclerview.HomageView.ExtraInfoMode;
 
-@SuppressWarnings("WeakerAccess")
-abstract class AbstractHomageAdapter<T extends ViewHolder> extends RecyclerView.Adapter<T> {
+public class HomageInfiniteAdapter extends HomageAdapter {
+
+
+    public HomageInfiniteAdapter(@NonNull Homage homage, @NonNull ExtraInfoMode extraInfoMode, boolean showIcons) {
+        super(homage, extraInfoMode, showIcons);
+    }
+
 
     @NonNull
-    protected final Homage mHomage;
-
-
-    public AbstractHomageAdapter(@NonNull Homage homage) {
-        mHomage = homage;
+    @Override
+    public Library getItem(int position) {
+        return super.getItem(position % mLibraries.size());
     }
 
     @Override
     public int getItemCount() {
-        return mHomage.getLibraries().size();
+        return Integer.MAX_VALUE;
     }
 }

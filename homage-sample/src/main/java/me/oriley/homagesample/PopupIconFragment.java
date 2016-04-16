@@ -20,10 +20,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import me.oriley.homage.Homage;
-import me.oriley.homage.recyclerview.HomageIconAdapter;
+import me.oriley.homage.recyclerview.HomageInfiniteAdapter;
+import me.oriley.homage.recyclerview.HomageView;
 
 @SuppressWarnings("WeakerAccess")
-public final class IconLicensesFragment extends RecyclerViewFragment {
+public final class PopupIconFragment extends RecyclerViewFragment {
 
     @NonNull
     @Override
@@ -34,7 +35,7 @@ public final class IconLicensesFragment extends RecyclerViewFragment {
         homage.addLicense("oriley", R.string.license_oriley_name, R.string.license_oriley_url, R.string.license_oriley_description);
         homage.refreshLibraries();
 
-        return new HomageIconAdapter(homage);
+        return new HomageInfiniteAdapter(homage, HomageView.ExtraInfoMode.POPUP, true);
     }
 
     @NonNull

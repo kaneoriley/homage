@@ -27,9 +27,13 @@
                 android:icon="@drawable/ic_stars"
                 android:title="@string/drawer_popup"/>
         <item
-                android:id="@+id/nav_icon"
+                android:id="@+id/nav_expandable_no_icons"
                 android:icon="@drawable/ic_stars"
-                android:title="@string/drawer_icon"/>
+                android:title="@string/drawer_expandable_no_icon"/>
+        <item
+                android:id="@+id/nav_popup_no_icons"
+                android:icon="@drawable/ic_stars"
+                android:title="@string/drawer_popup_no_icon"/>
     </group>
 
 </menu>
