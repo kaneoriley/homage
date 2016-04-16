@@ -19,33 +19,57 @@ package me.oriley.homage;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Spanned;
-import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
 public final class Library {
 
-    @SerializedName("name")
+    // "name"
+    @Nullable
     String mLibraryName;
 
-    @SerializedName("version")
+    // "version"
+    @Nullable
     String mLibraryVersion;
 
-    @SerializedName("description")
+    // "description"
+    @Nullable
     String mLibraryDescription;
 
-    @SerializedName("year")
+    // "year"
+    @Nullable
     String mLibraryYear;
 
-    @SerializedName("owner")
+    // "owner"
+    @Nullable
     String mLibraryOwner;
 
-    @SerializedName("url")
+    // "url"
+    @Nullable
     String mLibraryUrl;
 
-    @SerializedName("license")
+    // "license"
+    @Nullable
     String mLicenseCode;
 
     private License mLicense;
+
+
+    Library(@Nullable String name,
+            @Nullable String version,
+            @Nullable String description,
+            @Nullable String year,
+            @Nullable String owner,
+            @Nullable String url,
+            @Nullable String license) {
+        mLibraryName = name;
+        mLibraryVersion = version;
+        mLibraryDescription = description;
+        mLibraryYear = year;
+        mLibraryOwner = owner;
+        mLibraryUrl = url;
+        mLicenseCode = license;
+    }
+
 
     @Nullable
     public String getLibraryName() {
@@ -77,7 +101,7 @@ public final class Library {
         return mLibraryUrl;
     }
 
-    @NonNull
+    @Nullable
     public String getLicenseCode() {
         return mLicenseCode;
     }

@@ -26,18 +26,14 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.SpannedString;
 import android.util.Log;
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.*;
 
 import static java.util.Locale.US;
 import static me.oriley.homage.Homage.CoreLicense.*;
-import static me.oriley.homage.ReaderUtils.closeQuietly;
+import static me.oriley.homage.HomageUtils.parseLibraries;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public final class Homage {
@@ -149,7 +145,7 @@ public final class Homage {
     private static Library[] getLibraryArray(@NonNull Context context, @RawRes int rawResourceId) {
         try {
             InputStream stream = context.getResources().openRawResource(rawResourceId);
-            return getLibraries(stream);
+            return parseLibraries(stream);
         } catch (Resources.NotFoundException e) {
             Log.e(TAG, "NotFoundException reading license file: " + rawResourceId, e);
             return null;
@@ -160,26 +156,10 @@ public final class Homage {
     private static Library[] getLibraryArray(@NonNull Context context, @NonNull String assetPath) {
         try {
             InputStream stream = context.getAssets().open(assetPath);
-            return getLibraries(stream);
+            return parseLibraries(stream);
         } catch (IOException e) {
             Log.e(TAG, "IOException reading license file: " + assetPath, e);
             return null;
-        }
-    }
-
-    @Nullable
-    private static Library[] getLibraries(@NonNull InputStream inputStream) {
-        InputStreamReader reader = null;
-        try {
-            Gson gson = new Gson();
-            reader = new InputStreamReader(inputStream);
-            HomageModel model = gson.fromJson(reader, HomageModel.class);
-            return model.getLibraries();
-        } catch (JsonIOException | JsonSyntaxException e) {
-            Log.e(TAG, "Exception parsing JSON", e);
-            return null;
-        } finally {
-            closeQuietly(reader);
         }
     }
 }

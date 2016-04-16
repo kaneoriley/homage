@@ -24,8 +24,4 @@ android {
 dependencies {
     // Support Libraries
     compile 'com.android.support:support-annotations:23.2.0'
-
-    // TODO: Parse manually? Not sure we need Gson for this
-    // Gson parser
-    compile 'com.google.code.gson:gson:2.6.2'
 }

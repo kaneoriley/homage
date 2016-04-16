@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+## Version 0.0.3 WIP
+
+ *  Parse JSON manually rather than relying on Gson (drops effective method count from 1300 -> 75)
+
 ## Version 0.0.2
 
 _2016-04-13_
