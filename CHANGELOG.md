@@ -1,7 +1,9 @@
 Change Log
 ==========
 
-## Version 0.1.0 WIP
+## Version 0.1.0
+
+_2016-04-16_
 
  *  Parse JSON manually rather than relying on Gson (drops effective method count from 1300 -> 75)
  *  Added ability to specify an icon in licenses json
