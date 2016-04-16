@@ -2,6 +2,7 @@
   "licenses": [
     {
       "name": "Power Adapters",
+      "icon": "library_power_adapters",
       "version": "0.9.0",
       "year": "2016",
       "owner": "NextFaze",
@@ -11,6 +12,7 @@
     },
     {
       "name": "Power Data",
+      "icon": "library_power_data",
       "version": "0.4.0",
       "year": "2016",
       "owner": "NextFaze",
@@ -119,6 +121,16 @@
       "license": "lgpl3"
     },
     {
+      "name": "User Avatars Pack",
+      "icon": "library_user_avatar_pack",
+      "version": "1.0",
+      "year": "2016",
+      "owner": "Freepick",
+      "description": "User avatars collection for including in your application.",
+      "url": "http://www.freepik.com",
+      "license": "cc3"
+    },
+    {
       "name": "My Next Project",
       "icon": "library_unknown",
       "version": "-0.1",
@@ -131,15 +143,6 @@
     {
       "name": "Example with information omitted",
       "description": "And this example shows what happens when you leave information out."
-    },
-    {
-      "name": "User Avatars Pack",
-      "version": "1.0",
-      "year": "2016",
-      "owner": "Freepick",
-      "description": "User avatars collection for including in your application.",
-      "url": "http://www.freepik.com",
-      "license": "cc3"
     }
   ]
 }

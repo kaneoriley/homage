@@ -126,6 +126,9 @@ public final class Homage {
                 if (iconRes <= 0) {
                     iconRes = getResourceId(mContext, icon, "mipmap");
                 }
+                if (iconRes <= 0) {
+                    iconRes = android.R.drawable.sym_def_app_icon;
+                }
             }
             library.setIconResource(iconRes);
 
