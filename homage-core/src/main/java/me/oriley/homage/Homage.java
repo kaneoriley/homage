@@ -41,7 +41,7 @@ import static me.oriley.homage.HomageUtils.parseLibraries;
 public final class Homage {
 
     public enum CoreLicense {
-        CC0, CC3, APACHE2, BSD2, BSD3, LGPL3, MIT, UNKNOWN
+        CC0, CC3, APACHE2, BSD2, BSD3, LGPL3, MIT, UNRECOGNISED, NONE
     }
 
     private static final String TAG = Homage.class.getSimpleName();
@@ -73,7 +73,8 @@ public final class Homage {
         addLicense(BSD3, R.string.homage_license_bsd_3_licenseName, R.string.homage_license_bsd_3_licenseWebsite, R.string.homage_license_bsd_3_licenseDescription);
         addLicense(LGPL3, R.string.homage_license_lgpl_3_0_licenseName, R.string.homage_license_lgpl_3_0_licenseWebsite, R.string.homage_license_lgpl_3_0_licenseDescription);
         addLicense(MIT, R.string.homage_license_mit_licenseName, R.string.homage_license_mit_licenseWebsite, R.string.homage_license_mit_licenseDescription);
-        addLicense(UNKNOWN, R.string.homage_empty_license, R.string.homage_empty_license, R.string.homage_unrecognised_license);
+        addLicense(UNRECOGNISED, R.string.homage_empty_license, R.string.homage_empty_license, R.string.homage_unrecognised_license);
+        addLicense(NONE, R.string.homage_empty_license, R.string.homage_empty_license, R.string.homage_empty_license);
     }
 
     public Homage(@NonNull Context context, @RawRes int licensesResourceId) {
@@ -107,10 +108,14 @@ public final class Homage {
             String licenseCode = library.getLicenseCode();
 
             License license;
-            if (mLicenses.containsKey(licenseCode)) {
-                license = mLicenses.get(licenseCode);
+            if (!TextUtils.isEmpty(licenseCode)) {
+                if (mLicenses.containsKey(licenseCode)) {
+                    license = mLicenses.get(licenseCode);
+                } else {
+                    license = mLicenses.get(UNRECOGNISED.name().toLowerCase(US));
+                }
             } else {
-                license = mLicenses.get(UNKNOWN.name().toLowerCase(US));
+                license = mLicenses.get(NONE.name().toLowerCase(US));
             }
             library.setLicense(license);
 
