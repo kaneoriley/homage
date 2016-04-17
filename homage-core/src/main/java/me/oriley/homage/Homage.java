@@ -66,7 +66,7 @@ public final class Homage {
     private final Map<String, License> mLicenses = new HashMap<>();
 
     @NonNull
-    private final ArrayList<Library> mLibraries = new ArrayList<>();
+    private List<Library> mLibraries = Collections.emptyList();
 
     @NonNull
     private final Context mContext;
@@ -106,8 +106,6 @@ public final class Homage {
 
 
     public void refreshLibraries() {
-        mLibraries.clear();
-
         List<Library> newLibraries = new ArrayList<>();
         if (mAssetPaths != null) {
             for (String assetPath : mAssetPaths) {
@@ -168,14 +166,14 @@ public final class Homage {
                 }
             }
             library.setIconResource(iconRes);
-
-            mLibraries.add(library);
         }
+
+        mLibraries = Collections.unmodifiableList(newLibraries);
     }
 
     @NonNull
     public List<Library> getLibraries() {
-        return Collections.unmodifiableList(mLibraries);
+        return mLibraries;
     }
 
     private void addLicense(@NonNull CoreLicense coreLicense, @StringRes int nameRes, @StringRes int urlRes, @StringRes int descRes) {
