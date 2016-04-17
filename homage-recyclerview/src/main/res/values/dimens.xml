@@ -17,10 +17,24 @@
 
 <resources>
 
+    <dimen name="homage_divider_height">2px</dimen>
+
     <dimen name="homage_recycler_item_content_padding">12dp</dimen>
     <dimen name="homage_recycler_item_corner_radius">2dp</dimen>
     <dimen name="homage_recycler_item_elevation">2dp</dimen>
 
-    <dimen name="homage_popup_view_dialog_padding">12dp</dimen>
+    <dimen name="homage_license_title_text_size">12sp</dimen>
+    <dimen name="homage_license_rights_text_size">10sp</dimen>
+    <dimen name="homage_license_description_text_size">10sp</dimen>
+
+    <dimen name="homage_expanded_view_description_padding">8dp</dimen>
+    <dimen name="homage_expanded_view_description_margin_bottom">12dp</dimen>
+    <dimen name="homage_expanded_view_divider_vertical_margin">8dp</dimen>
+    <dimen name="homage_expanded_view_license_text_padding">8dp</dimen>
+
+    <dimen name="homage_popup_view_description_padding">16dp</dimen>
+    <dimen name="homage_popup_view_divider_vertical_margin">16dp</dimen>
+    <dimen name="homage_popup_view_license_text_padding">8dp</dimen>
+    <dimen name="homage_popup_view_scroll_padding">12dp</dimen>
 
 </resources>

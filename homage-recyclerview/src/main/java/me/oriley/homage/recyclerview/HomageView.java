@@ -77,6 +77,9 @@ public class HomageView extends HomageExpandableCardView {
     private TextView mExpandedLicenseName;
 
     @NonNull
+    private TextView mExpandedLicenseRights;
+
+    @NonNull
     private TextView mExpandedLicenseDescription;
 
     @NonNull
@@ -119,12 +122,14 @@ public class HomageView extends HomageExpandableCardView {
     protected void onExpandedViewInflated(@NonNull View view) {
         mExpandedDescription = (TextView) view.findViewById(R.id.homage_view_expanded_description);
         mExpandedLicenseName = (TextView) view.findViewById(R.id.homage_view_expanded_license_name);
+        mExpandedLicenseRights = (TextView) view.findViewById(R.id.homage_view_expanded_license_rights);
         mExpandedLicenseDescription = (TextView) view.findViewById(R.id.homage_view_expanded_license_description);
         mExpandedLicenseHolder = (HorizontalScrollView) view.findViewById(R.id.homage_view_expanded_license_holder);
 
         validateNonNull(mExpandedDescription, mExpandedLicenseName, mExpandedLicenseDescription, mExpandedLicenseHolder);
 
         mExpandedLicenseName.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
+        mExpandedLicenseRights.setTypeface(Typeface.MONOSPACE, Typeface.BOLD_ITALIC);
         mExpandedLicenseDescription.setTypeface(Typeface.MONOSPACE);
     }
 
@@ -187,14 +192,16 @@ public class HomageView extends HomageExpandableCardView {
 
         TextView descriptionView = (TextView) dialogView.findViewById(R.id.homage_view_popup_description);
         TextView licenseNameView = (TextView) dialogView.findViewById(R.id.homage_view_popup_license_name);
+        TextView licenseRightsView = (TextView) dialogView.findViewById(R.id.homage_view_popup_license_rights);
         TextView licenseDescriptionView = (TextView) dialogView.findViewById(R.id.homage_view_popup_license_description);
         View licenseHolder = dialogView.findViewById(R.id.homage_view_popup_license_holder);
 
         licenseNameView.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
+        licenseRightsView.setTypeface(Typeface.MONOSPACE, Typeface.BOLD_ITALIC);
         licenseDescriptionView.setTypeface(Typeface.MONOSPACE);
 
         updateDescription(descriptionView);
-        updateLicenseHolder(licenseHolder, licenseNameView, licenseDescriptionView);
+        updateLicenseHolder(licenseHolder, licenseNameView, licenseRightsView, licenseDescriptionView);
 
         Dialog dialog = new AlertDialog.Builder(getContext())
                 .setView(dialogView)
@@ -215,7 +222,8 @@ public class HomageView extends HomageExpandableCardView {
         if (mExtraInfoMode == ExtraInfoMode.EXPANDABLE) {
             resetExpandedState();
             updateDescription(mExpandedDescription);
-            updateLicenseHolder(mExpandedLicenseHolder, mExpandedLicenseName, mExpandedLicenseDescription);
+            updateLicenseHolder(mExpandedLicenseHolder, mExpandedLicenseName, mExpandedLicenseRights,
+                    mExpandedLicenseDescription);
             mChevronView.setVisibility(VISIBLE);
             mChevronView.setRotation(0f);
         } else {
@@ -254,12 +262,18 @@ public class HomageView extends HomageExpandableCardView {
         }
     }
 
-    private void updateLicenseHolder(@NonNull View holder, @Nullable TextView nameView, @Nullable TextView descriptionView) {
+    private void updateLicenseHolder(@NonNull View holder,
+                                     @Nullable TextView nameView,
+                                     @Nullable TextView rightsView,
+                                     @Nullable TextView descriptionView) {
         String licenseName = mLibrary != null ? mLibrary.getLicenseName() : null;
         Spanned licenseDescription = mLibrary != null ? mLibrary.getLicenseDescription() : null;
 
         if (nameView != null) {
             updateTextView(nameView, licenseName);
+        }
+        if (rightsView != null) {
+            updateLicenseRights(rightsView);
         }
         if (descriptionView != null) {
             updateTextView(descriptionView, licenseDescription);
@@ -272,12 +286,19 @@ public class HomageView extends HomageExpandableCardView {
         }
     }
 
-    private void updateLicenseName(@NonNull TextView view) {
-        updateTextView(view, mLibrary != null ? mLibrary.getLicenseName() : null);
-    }
+    private void updateLicenseRights(@NonNull TextView view) {
+        Context context = getContext();
+        String ownerInfo = createSummary();
+        String reserved = context.getString(R.string.homage_all_rights_reserved);
 
-    private void updateLicenseDescription(@NonNull TextView view) {
-        updateTextView(view, mLibrary != null ? mLibrary.getLicenseDescription() : null);
+        String rightsText;
+        if (ownerInfo != null) {
+            rightsText = context.getString(R.string.homage_copyright, ownerInfo, reserved);
+        } else {
+            rightsText = reserved;
+        }
+
+        updateTextView(view, rightsText);
     }
 
     private void updateTitle() {
@@ -291,17 +312,22 @@ public class HomageView extends HomageExpandableCardView {
     }
 
     private void updateSummary() {
+        updateTextView(mSummaryView, createSummary());
+    }
+
+    @Nullable
+    private String createSummary() {
         String owner = mLibrary != null ? mLibrary.getLibraryOwner() : null;
         String year = mLibrary != null ? mLibrary.getLibraryYear() : null;
         if (TextUtils.isEmpty(owner) && TextUtils.isEmpty(year)) {
-            updateTextView(mSummaryView, (String) null);
+            return null;
         } else {
             String joiner = ", ";
             if (year == null || owner == null) {
                 joiner = "";
             }
 
-            updateTextView(mSummaryView, nullToEmpty(year) + joiner + nullToEmpty(owner));
+            return nullToEmpty(year) + joiner + nullToEmpty(owner);
         }
     }
 }

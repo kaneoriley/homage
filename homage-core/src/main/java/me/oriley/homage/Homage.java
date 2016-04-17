@@ -38,7 +38,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
 
-import static java.util.Locale.US;
 import static me.oriley.homage.Homage.CoreLicense.*;
 import static me.oriley.homage.utils.IOUtils.closeQuietly;
 import static me.oriley.homage.utils.ResourceUtils.getResourceId;
@@ -57,7 +56,46 @@ public final class Homage {
     private static final String JSON_KEY_LICENSE = "license";
 
     public enum CoreLicense {
-        CC0, CC3, APACHE2, BSD2, BSD3, LGPL3, MIT, UNRECOGNISED, NONE
+        APACHE_2_0,
+        BSD_2, BSD_3,
+        CC0_1_0, CC_3_0,
+        LGPL_3_0,
+        MIT,
+        UNRECOGNISED,
+        NONE,
+    }
+
+    private enum Legacy {
+        CC0(CC0_1_0),
+        CC3(CC_3_0),
+        LGPL3(LGPL_3_0),
+        APACHE2(APACHE_2_0),
+        BSD2(BSD_2),
+        BSD3(BSD_3);
+
+        @NonNull
+        private final CoreLicense mLicense;
+
+        Legacy(@NonNull CoreLicense license) {
+            mLicense = license;
+        }
+
+        @NonNull
+        CoreLicense getCoreLicense() {
+            return mLicense;
+        }
+
+        @Nullable
+        static String translateLegacyCode(@NonNull String code) {
+            for (Legacy legacy : Legacy.values()) {
+                if (legacy.name().equalsIgnoreCase(code)) {
+                    return legacy.mLicense.name();
+                }
+            }
+
+            // Not found
+            return null;
+        }
     }
 
     private static final String TAG = Homage.class.getSimpleName();
@@ -83,13 +121,13 @@ public final class Homage {
     private Homage(@NonNull Context context) {
         mContext = context.getApplicationContext();
 
-        addLicense(CC0, R.string.homage_license_cc0_10_licenseName, R.string.homage_license_cc0_10_licenseWebsite, R.string.homage_license_cc0_10_licenseDescription);
-        addLicense(CC3, R.string.homage_license_cc30_licenseName, R.string.homage_license_cc30_licenseWebsite, R.string.homage_license_cc30_licenseDescription);
-        addLicense(APACHE2, R.string.homage_license_Apache_2_0_licenseName, R.string.homage_license_Apache_2_0_licenseWebsite, R.string.homage_license_Apache_2_0_licenseDescription);
-        addLicense(BSD2, R.string.homage_license_bsd_2_licenseName, R.string.homage_license_bsd_2_licenseWebsite, R.string.homage_license_bsd_2_licenseDescription);
-        addLicense(BSD3, R.string.homage_license_bsd_3_licenseName, R.string.homage_license_bsd_3_licenseWebsite, R.string.homage_license_bsd_3_licenseDescription);
-        addLicense(LGPL3, R.string.homage_license_lgpl_3_0_licenseName, R.string.homage_license_lgpl_3_0_licenseWebsite, R.string.homage_license_lgpl_3_0_licenseDescription);
-        addLicense(MIT, R.string.homage_license_mit_licenseName, R.string.homage_license_mit_licenseWebsite, R.string.homage_license_mit_licenseDescription);
+        addLicense(APACHE_2_0, R.string.homage_license_apache_2_0_name, R.string.homage_license_apache_2_0_website, R.string.homage_license_apache_2_0_description);
+        addLicense(BSD_2, R.string.homage_license_bsd_2_name, R.string.homage_license_bsd_2_website, R.string.homage_license_bsd_2_description);
+        addLicense(BSD_3, R.string.homage_license_bsd_3_name, R.string.homage_license_bsd_3_website, R.string.homage_license_bsd_3_description);
+        addLicense(CC0_1_0, R.string.homage_license_cc0_1_0_name, R.string.homage_license_cc0_1_0_website, R.string.homage_license_cc0_1_0_description);
+        addLicense(CC_3_0, R.string.homage_license_cc_3_0_name, R.string.homage_license_cc_3_0_website, R.string.homage_license_cc_3_0_description);
+        addLicense(LGPL_3_0, R.string.homage_license_lgpl_3_0_name, R.string.homage_license_lgpl_3_0_website, R.string.homage_license_lgpl_3_0_description);
+        addLicense(MIT, R.string.homage_license_mit_name, R.string.homage_license_mit_website, R.string.homage_license_mit_description);
         addLicense(UNRECOGNISED, R.string.homage_empty_license, R.string.homage_empty_license, R.string.homage_unrecognised_license);
         addLicense(NONE, R.string.homage_empty_license, R.string.homage_empty_license, R.string.homage_empty_license);
     }
@@ -144,13 +182,12 @@ public final class Homage {
 
             License license;
             if (!TextUtils.isEmpty(licenseCode)) {
-                if (mLicenses.containsKey(licenseCode)) {
-                    license = mLicenses.get(licenseCode);
-                } else {
-                    license = mLicenses.get(UNRECOGNISED.name().toLowerCase(US));
+                license = getLicense(licenseCode);
+                if (license == null) {
+                    license = mLicenses.get(UNRECOGNISED.name());
                 }
             } else {
-                license = mLicenses.get(NONE.name().toLowerCase(US));
+                license = mLicenses.get(NONE.name());
             }
             library.setLicense(license);
 
@@ -176,8 +213,26 @@ public final class Homage {
         return mLibraries;
     }
 
+    @Nullable
+    private License getLicense(@NonNull String code) {
+        for (String entryCode : mLicenses.keySet()) {
+            if (code.equalsIgnoreCase(entryCode)) {
+                return mLicenses.get(entryCode);
+            }
+        }
+
+        String translatedCode = Legacy.translateLegacyCode(code);
+        if (!TextUtils.isEmpty(translatedCode)) {
+            // Try legacy migrated code
+            return getLicense(translatedCode);
+        }
+
+        // Not found
+        return null;
+    }
+
     private void addLicense(@NonNull CoreLicense coreLicense, @StringRes int nameRes, @StringRes int urlRes, @StringRes int descRes) {
-        addLicense(coreLicense.name().toLowerCase(US), nameRes, urlRes, descRes);
+        addLicense(coreLicense.name(), nameRes, urlRes, descRes);
     }
 
     public void addLicense(@NonNull String key, @StringRes int nameRes, @StringRes int urlRes, @StringRes int descRes) {

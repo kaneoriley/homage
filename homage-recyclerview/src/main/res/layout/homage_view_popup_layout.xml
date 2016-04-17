@@ -16,10 +16,8 @@
   -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/homage_popup_view_dialog_padding"
             android:clipToPadding="false"
             android:clipChildren="false">
 
@@ -31,7 +29,7 @@
                 android:id="@+id/homage_view_popup_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
+                android:padding="@dimen/homage_popup_view_description_padding"
                 android:includeFontPadding="false"
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
 
@@ -40,37 +38,48 @@
                      android:layout_height="wrap_content">
 
             <View android:layout_width="match_parent"
-                  android:layout_height="2px"
-                  android:layout_marginTop="16dp"
-                  android:layout_marginBottom="16dp"
-                  android:background="@color/homage_divider"
-                  tools:ignore="PxUsage"/>
+                  android:layout_height="@dimen/homage_divider_height"
+                  android:layout_marginTop="@dimen/homage_popup_view_divider_vertical_margin"
+                  android:layout_marginBottom="@dimen/homage_popup_view_divider_vertical_margin"
+                  android:background="@color/homage_divider"/>
 
             <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/homage_popup_view_scroll_padding"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
                     android:background="@color/homage_license_background">
 
                 <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scrollbars="horizontal"
-                        android:orientation="vertical"
-                        android:padding="8dp">
+                        android:orientation="vertical">
 
                     <TextView
                             android:id="@+id/homage_view_popup_license_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:textAppearance="?android:attr/textAppearanceSmall"/>
+                            android:padding="@dimen/homage_popup_view_license_text_padding"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="@dimen/homage_license_title_text_size"/>
+
+                    <TextView
+                            android:id="@+id/homage_view_popup_license_rights"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/homage_popup_view_license_text_padding"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="@dimen/homage_license_rights_text_size"/>
 
                     <TextView
                             android:id="@+id/homage_view_popup_license_description"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:textAppearance="?android:attr/textAppearanceSmall"/>
+                            android:padding="@dimen/homage_popup_view_license_text_padding"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textSize="@dimen/homage_license_description_text_size"/>
 
                 </LinearLayout>
 

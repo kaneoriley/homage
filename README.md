@@ -126,10 +126,22 @@ The required format for the JSON file you pass to Homage is as follows:
 The `icon` field is the name of a drawable resource included in your application. If the specified name is invalid,
 the value of `library.getIconResource()` will be `-1`, otherwise it will be the resource ID of the drawable.
  
-The following are valid values for the `license` field: "cc0", "cc3", "apache2", "bsd2", "bsd3", "lgpl3", "mit"
+The following are valid values for the `license` field:
 
-If you need to include any custom licenses, then enter the key you use to add the license to your `Homage`
-instance instead.
+```
+"apache_2_0"  - Apache 2.0
+"bsd_2"       - BSD 2-Clause
+"bsd_3"       - BSD 3-Clause
+"cc0_1_0"     - CC0 1.0 Universal
+"cc_3_0"      - Creative Commons 3.0
+"lgpl_3_0"    - Lesser GNU Public License 3.0
+"mit"         - The MIT License
+```
+
+I'm happy to accept pull requests/templates or suggestions for licenses which should be added.
+
+If you add any custom licenses to your `Homage` instance, be sure to set the json key for the applicable library to
+match the one you use to add it so that it can be matched up at runtime.
 
 # Gradle Dependency
 

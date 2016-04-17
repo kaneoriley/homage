@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 Kane O'Riley
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License")
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources translatable="false">
+
+    <string name="homage_license_bsd_3_name">BSD 3-Clause License</string>
+    <string name="homage_license_bsd_3_website">http://opensource.org/licenses/BSD-3-Clause</string>
+    <string name="homage_license_bsd_3_description">
+        <![CDATA[
+Redistribution and use in source and binary forms, with or without modification,<br/>
+are permitted provided that the following conditions are met:<br/>
+<br/>
+ * Redistributions of source code must retain the above copyright notice, this<br/>
+   list of conditions and the following disclaimer.<br/>
+<br/>
+ * Redistributions in binary form must reproduce the above copyright notice,<br/>
+   this list of conditions and the following disclaimer in the documentation<br/>
+   and/or other materials provided with the distribution.<br/>
+<br/>
+ * Neither the name of the copyright holder nor the names of its contributors may be<br/>
+   used to endorse or promote products derived from this software without specific<br/>
+   prior written permission.<br/>
+<br/>
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND<br/>
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED<br/>
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE<br/>
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR<br/>
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES<br/>
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;<br/>
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON<br/>
+ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT<br/>
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS<br/>
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        ]]>
+    </string>
+
+</resources>
