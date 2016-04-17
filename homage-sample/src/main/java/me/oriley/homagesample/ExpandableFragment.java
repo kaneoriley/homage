@@ -29,7 +29,7 @@ public final class ExpandableFragment extends RecyclerViewFragment {
     @NonNull
     @Override
     public RecyclerView.Adapter createAdapter() {
-        Homage homage = new Homage(getActivity(), R.raw.licenses);
+        Homage homage = new Homage(getActivity(), R.raw.licenses_nextfaze, R.raw.licenses_oriley, R.raw.licenses_base);
 
         // Adds a custom license definition to enable matching in your JSON list
         homage.addLicense("oriley", R.string.license_oriley_name, R.string.license_oriley_url, R.string.license_oriley_description);

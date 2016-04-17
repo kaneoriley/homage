@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## Version 0.1.1 WIP
+
+ *  Homage constructor now accepts varargs parameter for resource IDs/asset paths. Useful if you have a common base
+    application/library and wish to maintain a set of core licenses without having to also include them in the child
+    project.
+
 ## Version 0.1.0
 
 _2016-04-16_

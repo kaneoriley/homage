@@ -72,10 +72,11 @@ public final class Homage {
     private final Context mContext;
 
     @Nullable
-    private String mAssetPath;
+    private String mAssetPaths[];
 
+    @Nullable
     @RawRes
-    private int mResourceId;
+    private int[] mResourceIds;
 
 
     // Application context so don't stress :)
@@ -93,34 +94,54 @@ public final class Homage {
         addLicense(NONE, R.string.homage_empty_license, R.string.homage_empty_license, R.string.homage_empty_license);
     }
 
-    public Homage(@NonNull Context context, @RawRes int licensesResourceId) {
+    public Homage(@NonNull Context context, @NonNull @RawRes int... licensesResourceIds) {
         this(context);
-        mResourceId = licensesResourceId;
+        mResourceIds = licensesResourceIds;
     }
 
-    public Homage(@NonNull Context context, @NonNull String assetPath) {
+    public Homage(@NonNull Context context, @NonNull String... assetPaths) {
         this(context);
-        mAssetPath = assetPath;
+        mAssetPaths = assetPaths;
     }
 
 
     public void refreshLibraries() {
         mLibraries.clear();
 
-        Library[] libraries;
-        if (mAssetPath != null) {
-            libraries = getLibraryArray(mContext, mAssetPath);
-        } else if (mResourceId > 0) {
-            libraries = getLibraryArray(mContext, mResourceId);
-        } else {
-            throw new IllegalStateException("No asset path or resource ID available");
+        List<Library> newLibraries = new ArrayList<>();
+        if (mAssetPaths != null) {
+            for (String assetPath : mAssetPaths) {
+                if (TextUtils.isEmpty(assetPath)) {
+                    Log.w(TAG, "Empty asset path passed, ignoring");
+                    continue;
+                }
+
+                Library[] libs = getLibraryArray(mContext, assetPath);
+                if (libs != null) {
+                    Collections.addAll(newLibraries, libs);
+                }
+            }
+        }
+        if (mResourceIds != null) {
+            for (int resourceId : mResourceIds) {
+                if (resourceId <= 0) {
+                    Log.w(TAG, "Invalid resource ID passed: " + resourceId + ", ignoring");
+                    continue;
+                }
+
+                Library[] libs = getLibraryArray(mContext, resourceId);
+                if (libs != null) {
+                    Collections.addAll(newLibraries, libs);
+                }
+            }
         }
 
-        if (libraries == null) {
+        if (newLibraries.isEmpty()) {
+            Log.w(TAG, "No libraries found");
             return;
         }
 
-        for (Library library : libraries) {
+        for (Library library : newLibraries) {
             String licenseCode = library.getLicenseCode();
 
             License license;

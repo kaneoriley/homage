@@ -12,17 +12,23 @@ use straight away in your app.
 ## Usage
 
 To construct a `Homage` instance, you will need to pass in a `Context` (the `Application` context will automatically be
-retrieved so you don't have to worry about any `Activity` references being held on to), and either an asset path or a
-raw resource ID.
+retrieved so you don't have to worry about any `Activity` references being held on to), and a varargs array of either
+asset paths or raw resource IDs.
 
 Example construction (from your host activity):
 
 ```java
-// Using a raw resource
+// Using a single raw resource
 mHomage = new Homage(getActivity(), R.raw.licenses);
 
-// Or, using an asset path
+// Using multiple raw resources
+mHomage = new Homage(getActivity(), R.raw.licenses_my_base_project, R.raw.licenses_my_app);
+
+// Using an asset path
 mHomage = new Homage(getActivity(), "path/to/licenses.json");
+
+// Using multiple asset paths
+mHomage = new Homage(getActivity(), "path/to/licenses_my_base_project.json", "path/to/licenses_my_app.json");
 ```
 
 After construction, you must add any custom license definitions, and refresh the library list. If you only need to use

@@ -1,0 +1,64 @@
+{
+  "licenses": [
+    {
+      "name": "ButterKnife",
+      "icon": "library_butterknife",
+      "version": "7.0.2",
+      "year": "2013",
+      "owner": "Jake Wharton",
+      "description": "Bind Android views and callbacks to fields and methods.",
+      "url": "https://github.com/JakeWharton/butterknife",
+      "license": "apache2"
+    },
+    {
+      "name": "Rebound",
+      "icon": "library_rebound",
+      "version": "0.3.6",
+      "year": "2013",
+      "owner": "Facebook",
+      "description": "Rebound is a java library that models spring dynamics. Rebound spring models can be used to create animations that feel natural by introducing real world physics to your application.",
+      "url": "http://facebook.github.io/rebound/",
+      "license": "bsd2"
+    },
+    {
+      "name": "Fresco",
+      "icon": "library_fresco",
+      "version": "0.9.0",
+      "year": "2015",
+      "owner": "Facebook",
+      "description": "Fresco takes care of image loading and display, so you don't have to. It will load images from the network, local storage, or local resources, and display a placeholder until the image has arrived. It has two levels of cache; one in memory and another in internal storage.",
+      "url": "http://facebook.github.io/fresco/",
+      "license": "bsd2"
+    },
+    {
+      "name": "Project Lombok",
+      "icon": "library_lombok",
+      "version": "1.16.8",
+      "year": "2009",
+      "owner": "The Project Lombok Authors",
+      "description": "Project Lombok makes java a spicier language by adding 'handlers' that know how to build and compile simple, boilerplate-free, not-quite-java code.",
+      "url": "https://projectlombok.org/",
+      "license": "mit"
+    },
+    {
+      "name": "Encryption",
+      "icon": "library_encryption",
+      "version": "1.2.0",
+      "year": "2016",
+      "owner": "simbiose",
+      "description": "Encryption is a simple way to create encrypted strings to Android project.",
+      "url": "https://github.com/simbiose/Encryption",
+      "license": "lgpl3"
+    },
+    {
+      "name": "User Avatars Pack",
+      "icon": "library_user_avatar_pack",
+      "version": "1.0",
+      "year": "2016",
+      "owner": "Freepick",
+      "description": "User avatars collection for including in your application.",
+      "url": "http://www.freepik.com",
+      "license": "cc3"
+    }
+  ]
+}
