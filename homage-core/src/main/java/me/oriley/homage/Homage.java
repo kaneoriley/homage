@@ -27,18 +27,34 @@ import android.text.Spanned;
 import android.text.SpannedString;
 import android.text.TextUtils;
 import android.util.Log;
+import me.oriley.homage.utils.ResourceUtils.ResourceType;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 import static java.util.Locale.US;
 import static me.oriley.homage.Homage.CoreLicense.*;
-import static me.oriley.homage.HomageUtils.getResourceId;
-import static me.oriley.homage.HomageUtils.parseLibraries;
+import static me.oriley.homage.utils.IOUtils.closeQuietly;
+import static me.oriley.homage.utils.ResourceUtils.getResourceId;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public final class Homage {
+
+    private static final String JSON_KEY_LICENSES = "licenses";
+    private static final String JSON_KEY_NAME = "name";
+    private static final String JSON_KEY_ICON = "icon";
+    private static final String JSON_KEY_VERSION = "version";
+    private static final String JSON_KEY_DESCRIPTION = "description";
+    private static final String JSON_KEY_YEAR = "year";
+    private static final String JSON_KEY_OWNER = "owner";
+    private static final String JSON_KEY_URL = "url";
+    private static final String JSON_KEY_LICENSE = "license";
 
     public enum CoreLicense {
         CC0, CC3, APACHE2, BSD2, BSD3, LGPL3, MIT, UNRECOGNISED, NONE
@@ -122,9 +138,9 @@ public final class Homage {
             int iconRes = -1;
             String icon = library.getLibraryIcon();
             if (!TextUtils.isEmpty(icon)) {
-                iconRes = getResourceId(mContext, icon, "drawable");
+                iconRes = getResourceId(mContext, icon, ResourceType.DRAWABLE);
                 if (iconRes <= 0) {
-                    iconRes = getResourceId(mContext, icon, "mipmap");
+                    iconRes = getResourceId(mContext, icon, ResourceType.MIPMAP);
                 }
                 if (iconRes <= 0) {
                     iconRes = android.R.drawable.sym_def_app_icon;
@@ -181,5 +197,65 @@ public final class Homage {
             Log.e(TAG, "IOException reading license file: " + assetPath, e);
             return null;
         }
+    }
+
+    @Nullable
+    private static Library[] parseLibraries(@NonNull InputStream inputStream) {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder jsonBuilder = new StringBuilder();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonBuilder.append(line);
+            }
+
+            JSONObject json = new JSONObject(jsonBuilder.toString());
+
+            List<Library> libraries = new ArrayList<>();
+            JSONArray array = json.getJSONArray(JSON_KEY_LICENSES);
+            for (int i = 0 ; i < array.length(); i++) {
+                JSONObject object = array.getJSONObject(i);
+                libraries.add(parseLibrary(object));
+            }
+
+            return libraries.toArray(new Library[libraries.size()]);
+        } catch (IOException e) {
+            Log.e(TAG, "Exception reading input stream", e);
+            return null;
+        } catch (JSONException e) {
+            Log.e(TAG, "Exception parsing JSON", e);
+            return null;
+        } finally {
+            closeQuietly(reader);
+        }
+    }
+
+    @NonNull
+    private static Library parseLibrary(@NonNull JSONObject json) throws JSONException {
+        String name = getOptionalString(json, JSON_KEY_NAME);
+        String icon = getOptionalString(json, JSON_KEY_ICON);
+        String version = getOptionalString(json, JSON_KEY_VERSION);
+        String description = getOptionalString(json, JSON_KEY_DESCRIPTION);
+        String year = getOptionalString(json, JSON_KEY_YEAR);
+        String owner = getOptionalString(json, JSON_KEY_OWNER);
+        String url = getOptionalString(json, JSON_KEY_URL);
+        String license = getOptionalString(json, JSON_KEY_LICENSE);
+        return new Library(name, icon, version, description, year, owner, url, license);
+    }
+
+    @Nullable
+    private static String getOptionalString(@NonNull JSONObject jsonObject, @NonNull String key) {
+        try {
+            return getString(jsonObject, key);
+        } catch (JSONException e) {
+            return null;
+        }
+    }
+
+    @Nullable
+    private static String getString(@NonNull JSONObject jsonObject, @NonNull String key) throws JSONException {
+        return jsonObject.getString(key);
     }
 }

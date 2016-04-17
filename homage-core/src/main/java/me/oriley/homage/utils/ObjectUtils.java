@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *  You may obtain a copy of the License at
  *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,21 +14,24 @@
  * limitations under the License.
  */
 
-package me.oriley.homage.recyclerview;
+package me.oriley.homage.utils;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
-final class StringUtils {
+@SuppressWarnings("WeakerAccess")
+public final class ObjectUtils {
 
 
-    private StringUtils() {
+    private ObjectUtils() {
         throw new IllegalAccessError("no instances");
     }
 
 
-    @NonNull
-    static String nullToEmpty(@Nullable String value) {
-        return value != null ? value : "";
+    public static void validateNonNull(@NonNull Object... objects) {
+        for (Object object : objects) {
+            if (object == null) {
+                throw new NullPointerException("Object cannot be null");
+            }
+        }
     }
 }
