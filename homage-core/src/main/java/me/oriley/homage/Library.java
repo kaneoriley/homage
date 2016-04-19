@@ -48,6 +48,10 @@ public final class Library {
     @Nullable
     private final String mLibraryOwner;
 
+    // "ownerUrl"
+    @Nullable
+    private final String mLibraryOwnerUrl;
+
     // "url"
     @Nullable
     private final String mLibraryUrl;
@@ -61,6 +65,7 @@ public final class Library {
     @DrawableRes
     private int mIconResource;
 
+    private boolean mIsIconUrl = false;
 
     Library(@Nullable String name,
             @Nullable String icon,
@@ -68,6 +73,7 @@ public final class Library {
             @Nullable String description,
             @Nullable String year,
             @Nullable String owner,
+            @Nullable String ownerUrl,
             @Nullable String url,
             @Nullable String license) {
         mLibraryName = name;
@@ -76,6 +82,7 @@ public final class Library {
         mLibraryDescription = description;
         mLibraryYear = year;
         mLibraryOwner = owner;
+        mLibraryOwnerUrl = ownerUrl;
         mLibraryUrl = url;
         mLicenseCode = license;
     }
@@ -112,6 +119,11 @@ public final class Library {
     }
 
     @Nullable
+    public String getLibraryOwnerUrl() {
+        return mLibraryOwnerUrl;
+    }
+
+    @Nullable
     public String getLibraryUrl() {
         return mLibraryUrl;
     }
@@ -126,6 +138,10 @@ public final class Library {
         return mIconResource;
     }
 
+    public boolean getIsIconUrl() {
+        return mIsIconUrl;
+    }
+
     @NonNull
     public License getLicense() {
         validateLicense();
@@ -134,6 +150,10 @@ public final class Library {
 
     void setIconResource(@DrawableRes int iconResource) {
         mIconResource = iconResource;
+    }
+
+    void setIsIconUrl(boolean isIconUrl) {
+        mIsIconUrl = isIconUrl;
     }
 
     void setLicense(@NonNull License license) {
