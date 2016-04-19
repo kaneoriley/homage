@@ -196,14 +196,14 @@ public final class Homage {
             library.setLicense(license);
 
             int iconRes = -1;
-            String icon = library.getLibraryIcon();
-            if (!TextUtils.isEmpty(icon)) {
-                boolean b = Patterns.WEB_URL.matcher(icon).matches();
-                library.setIsIconUrl(b);
-                if (!b) {
-                    iconRes = getResourceId(mContext, icon, ResourceType.DRAWABLE);
+            String iconUri = library.getLibraryIcon();
+            if (!TextUtils.isEmpty(iconUri)) {
+                if (Patterns.WEB_URL.matcher(iconUri).matches()) {
+                    library.setIconUri(iconUri);
+                } else {
+                    iconRes = getResourceId(mContext, iconUri, ResourceType.DRAWABLE);
                     if (iconRes <= 0) {
-                        iconRes = getResourceId(mContext, icon, ResourceType.MIPMAP);
+                        iconRes = getResourceId(mContext, iconUri, ResourceType.MIPMAP);
                     }
                     if (iconRes <= 0) {
                         iconRes = android.R.drawable.sym_def_app_icon;
@@ -211,7 +211,6 @@ public final class Homage {
                 }
                 library.setIconResource(iconRes);
             }
-            mLibraries.add(library);
         }
 
         mLibraries = Collections.unmodifiableList(newLibraries);

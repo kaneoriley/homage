@@ -48,7 +48,7 @@ public final class Library {
     @Nullable
     private final String mLibraryOwner;
 
-    // "ownerUrl"
+    // "owner url"
     @Nullable
     private final String mLibraryOwnerUrl;
 
@@ -65,7 +65,9 @@ public final class Library {
     @DrawableRes
     private int mIconResource;
 
-    private boolean mIsIconUrl = false;
+    @Nullable
+    private String mIconUri;
+
 
     Library(@Nullable String name,
             @Nullable String icon,
@@ -138,8 +140,9 @@ public final class Library {
         return mIconResource;
     }
 
-    public boolean getIsIconUrl() {
-        return mIsIconUrl;
+    @Nullable
+    public String getIconUri() {
+        return mIconUri;
     }
 
     @NonNull
@@ -152,8 +155,8 @@ public final class Library {
         mIconResource = iconResource;
     }
 
-    void setIsIconUrl(boolean isIconUrl) {
-        mIsIconUrl = isIconUrl;
+    void setIconUri(@Nullable String iconUri) {
+        mIconUri = iconUri;
     }
 
     void setLicense(@NonNull License license) {
