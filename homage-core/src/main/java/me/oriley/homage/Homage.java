@@ -211,7 +211,6 @@ public final class Homage {
                 }
                 library.setIconResource(iconRes);
             }
-            mLibraries.add(library);
         }
 
         mLibraries = Collections.unmodifiableList(newLibraries);
