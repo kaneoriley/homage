@@ -27,7 +27,6 @@ import android.text.Spanned;
 import android.text.SpannedString;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Patterns;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -195,21 +194,20 @@ public final class Homage {
             }
             library.setLicense(license);
 
-            int iconRes = -1;
-            String iconUri = library.getLibraryIcon();
-            if (!TextUtils.isEmpty(iconUri)) {
-                if (Patterns.WEB_URL.matcher(iconUri).matches()) {
-                    library.setIconUri(iconUri);
+            String icon = library.getLibraryIcon();
+            if (!TextUtils.isEmpty(icon)) {
+                if (icon.contains("://")) {
+                    library.setIconUri(icon);
                 } else {
-                    iconRes = getResourceId(mContext, iconUri, ResourceType.DRAWABLE);
+                    int iconRes = getResourceId(mContext, icon, ResourceType.DRAWABLE);
                     if (iconRes <= 0) {
-                        iconRes = getResourceId(mContext, iconUri, ResourceType.MIPMAP);
+                        iconRes = getResourceId(mContext, icon, ResourceType.MIPMAP);
                     }
                     if (iconRes <= 0) {
                         iconRes = android.R.drawable.sym_def_app_icon;
                     }
+                    library.setIconResource(iconRes);
                 }
-                library.setIconResource(iconRes);
             }
         }
 
