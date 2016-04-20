@@ -27,7 +27,7 @@ import android.text.Spanned;
 import android.text.SpannedString;
 import android.text.TextUtils;
 import android.util.Log;
-import me.oriley.homage.utils.ResourceUtils.ResourceType;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +37,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
+
+import me.oriley.homage.utils.ResourceUtils.ResourceType;
 
 import static me.oriley.homage.Homage.CoreLicense.*;
 import static me.oriley.homage.utils.IOUtils.closeQuietly;
@@ -52,6 +54,7 @@ public final class Homage {
     private static final String JSON_KEY_DESCRIPTION = "description";
     private static final String JSON_KEY_YEAR = "year";
     private static final String JSON_KEY_OWNER = "owner";
+    private static final String JSON_KEY_OWNER_URL = "ownerUrl";
     private static final String JSON_KEY_URL = "url";
     private static final String JSON_KEY_LICENSE = "license";
 
@@ -191,18 +194,21 @@ public final class Homage {
             }
             library.setLicense(license);
 
-            int iconRes = -1;
             String icon = library.getLibraryIcon();
             if (!TextUtils.isEmpty(icon)) {
-                iconRes = getResourceId(mContext, icon, ResourceType.DRAWABLE);
-                if (iconRes <= 0) {
-                    iconRes = getResourceId(mContext, icon, ResourceType.MIPMAP);
-                }
-                if (iconRes <= 0) {
-                    iconRes = android.R.drawable.sym_def_app_icon;
+                if (icon.contains("://")) {
+                    library.setIconUri(icon);
+                } else {
+                    int iconRes = getResourceId(mContext, icon, ResourceType.DRAWABLE);
+                    if (iconRes <= 0) {
+                        iconRes = getResourceId(mContext, icon, ResourceType.MIPMAP);
+                    }
+                    if (iconRes <= 0) {
+                        iconRes = android.R.drawable.sym_def_app_icon;
+                    }
+                    library.setIconResource(iconRes);
                 }
             }
-            library.setIconResource(iconRes);
         }
 
         mLibraries = Collections.unmodifiableList(newLibraries);
@@ -314,9 +320,10 @@ public final class Homage {
         String description = getOptionalString(json, JSON_KEY_DESCRIPTION);
         String year = getOptionalString(json, JSON_KEY_YEAR);
         String owner = getOptionalString(json, JSON_KEY_OWNER);
+        String ownerUrl = getOptionalString(json, JSON_KEY_OWNER_URL);
         String url = getOptionalString(json, JSON_KEY_URL);
         String license = getOptionalString(json, JSON_KEY_LICENSE);
-        return new Library(name, icon, version, description, year, owner, url, license);
+        return new Library(name, icon, version, description, year, owner, ownerUrl, url, license);
     }
 
     @Nullable
