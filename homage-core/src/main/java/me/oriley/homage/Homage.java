@@ -28,20 +28,77 @@ import android.text.SpannedString;
 import android.text.TextUtils;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
-import static java.util.Locale.US;
+import me.oriley.homage.utils.ResourceUtils.ResourceType;
+
 import static me.oriley.homage.Homage.CoreLicense.*;
-import static me.oriley.homage.HomageUtils.getResourceId;
-import static me.oriley.homage.HomageUtils.parseLibraries;
+import static me.oriley.homage.utils.IOUtils.closeQuietly;
+import static me.oriley.homage.utils.ResourceUtils.getResourceId;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public final class Homage {
 
+    private static final String JSON_KEY_LICENSES = "licenses";
+    private static final String JSON_KEY_NAME = "name";
+    private static final String JSON_KEY_ICON = "icon";
+    private static final String JSON_KEY_VERSION = "version";
+    private static final String JSON_KEY_DESCRIPTION = "description";
+    private static final String JSON_KEY_YEAR = "year";
+    private static final String JSON_KEY_OWNER = "owner";
+    private static final String JSON_KEY_OWNER_URL = "ownerUrl";
+    private static final String JSON_KEY_URL = "url";
+    private static final String JSON_KEY_LICENSE = "license";
+
     public enum CoreLicense {
-        CC0, CC3, APACHE2, BSD2, BSD3, LGPL3, MIT, UNRECOGNISED, NONE
+        APACHE_2_0,
+        BSD_2, BSD_3,
+        CC0_1_0, CC_3_0,
+        LGPL_3_0,
+        MIT,
+        UNRECOGNISED,
+        NONE,
+    }
+
+    private enum Legacy {
+        CC0(CC0_1_0),
+        CC3(CC_3_0),
+        LGPL3(LGPL_3_0),
+        APACHE2(APACHE_2_0),
+        BSD2(BSD_2),
+        BSD3(BSD_3);
+
+        @NonNull
+        private final CoreLicense mLicense;
+
+        Legacy(@NonNull CoreLicense license) {
+            mLicense = license;
+        }
+
+        @NonNull
+        CoreLicense getCoreLicense() {
+            return mLicense;
+        }
+
+        @Nullable
+        static String translateLegacyCode(@NonNull String code) {
+            for (Legacy legacy : Legacy.values()) {
+                if (legacy.name().equalsIgnoreCase(code)) {
+                    return legacy.mLicense.name();
+                }
+            }
+
+            // Not found
+            return null;
+        }
     }
 
     private static final String TAG = Homage.class.getSimpleName();
@@ -50,99 +107,138 @@ public final class Homage {
     private final Map<String, License> mLicenses = new HashMap<>();
 
     @NonNull
-    private final ArrayList<Library> mLibraries = new ArrayList<>();
+    private List<Library> mLibraries = Collections.emptyList();
 
     @NonNull
     private final Context mContext;
 
     @Nullable
-    private String mAssetPath;
+    private String mAssetPaths[];
 
+    @Nullable
     @RawRes
-    private int mResourceId;
+    private int[] mResourceIds;
 
 
     // Application context so don't stress :)
     private Homage(@NonNull Context context) {
         mContext = context.getApplicationContext();
 
-        addLicense(CC0, R.string.homage_license_cc0_10_licenseName, R.string.homage_license_cc0_10_licenseWebsite, R.string.homage_license_cc0_10_licenseDescription);
-        addLicense(CC3, R.string.homage_license_cc30_licenseName, R.string.homage_license_cc30_licenseWebsite, R.string.homage_license_cc30_licenseDescription);
-        addLicense(APACHE2, R.string.homage_license_Apache_2_0_licenseName, R.string.homage_license_Apache_2_0_licenseWebsite, R.string.homage_license_Apache_2_0_licenseDescription);
-        addLicense(BSD2, R.string.homage_license_bsd_2_licenseName, R.string.homage_license_bsd_2_licenseWebsite, R.string.homage_license_bsd_2_licenseDescription);
-        addLicense(BSD3, R.string.homage_license_bsd_3_licenseName, R.string.homage_license_bsd_3_licenseWebsite, R.string.homage_license_bsd_3_licenseDescription);
-        addLicense(LGPL3, R.string.homage_license_lgpl_3_0_licenseName, R.string.homage_license_lgpl_3_0_licenseWebsite, R.string.homage_license_lgpl_3_0_licenseDescription);
-        addLicense(MIT, R.string.homage_license_mit_licenseName, R.string.homage_license_mit_licenseWebsite, R.string.homage_license_mit_licenseDescription);
+        addLicense(APACHE_2_0, R.string.homage_license_apache_2_0_name, R.string.homage_license_apache_2_0_website, R.string.homage_license_apache_2_0_description);
+        addLicense(BSD_2, R.string.homage_license_bsd_2_name, R.string.homage_license_bsd_2_website, R.string.homage_license_bsd_2_description);
+        addLicense(BSD_3, R.string.homage_license_bsd_3_name, R.string.homage_license_bsd_3_website, R.string.homage_license_bsd_3_description);
+        addLicense(CC0_1_0, R.string.homage_license_cc0_1_0_name, R.string.homage_license_cc0_1_0_website, R.string.homage_license_cc0_1_0_description);
+        addLicense(CC_3_0, R.string.homage_license_cc_3_0_name, R.string.homage_license_cc_3_0_website, R.string.homage_license_cc_3_0_description);
+        addLicense(LGPL_3_0, R.string.homage_license_lgpl_3_0_name, R.string.homage_license_lgpl_3_0_website, R.string.homage_license_lgpl_3_0_description);
+        addLicense(MIT, R.string.homage_license_mit_name, R.string.homage_license_mit_website, R.string.homage_license_mit_description);
         addLicense(UNRECOGNISED, R.string.homage_empty_license, R.string.homage_empty_license, R.string.homage_unrecognised_license);
         addLicense(NONE, R.string.homage_empty_license, R.string.homage_empty_license, R.string.homage_empty_license);
     }
 
-    public Homage(@NonNull Context context, @RawRes int licensesResourceId) {
+    public Homage(@NonNull Context context, @NonNull @RawRes int... licensesResourceIds) {
         this(context);
-        mResourceId = licensesResourceId;
+        mResourceIds = licensesResourceIds;
     }
 
-    public Homage(@NonNull Context context, @NonNull String assetPath) {
+    public Homage(@NonNull Context context, @NonNull String... assetPaths) {
         this(context);
-        mAssetPath = assetPath;
+        mAssetPaths = assetPaths;
     }
 
 
     public void refreshLibraries() {
-        mLibraries.clear();
+        List<Library> newLibraries = new ArrayList<>();
+        if (mAssetPaths != null) {
+            for (String assetPath : mAssetPaths) {
+                if (TextUtils.isEmpty(assetPath)) {
+                    Log.w(TAG, "Empty asset path passed, ignoring");
+                    continue;
+                }
 
-        Library[] libraries;
-        if (mAssetPath != null) {
-            libraries = getLibraryArray(mContext, mAssetPath);
-        } else if (mResourceId > 0) {
-            libraries = getLibraryArray(mContext, mResourceId);
-        } else {
-            throw new IllegalStateException("No asset path or resource ID available");
+                Library[] libs = getLibraryArray(mContext, assetPath);
+                if (libs != null) {
+                    Collections.addAll(newLibraries, libs);
+                }
+            }
+        }
+        if (mResourceIds != null) {
+            for (int resourceId : mResourceIds) {
+                if (resourceId <= 0) {
+                    Log.w(TAG, "Invalid resource ID passed: " + resourceId + ", ignoring");
+                    continue;
+                }
+
+                Library[] libs = getLibraryArray(mContext, resourceId);
+                if (libs != null) {
+                    Collections.addAll(newLibraries, libs);
+                }
+            }
         }
 
-        if (libraries == null) {
+        if (newLibraries.isEmpty()) {
+            Log.w(TAG, "No libraries found");
             return;
         }
 
-        for (Library library : libraries) {
+        for (Library library : newLibraries) {
             String licenseCode = library.getLicenseCode();
 
             License license;
             if (!TextUtils.isEmpty(licenseCode)) {
-                if (mLicenses.containsKey(licenseCode)) {
-                    license = mLicenses.get(licenseCode);
-                } else {
-                    license = mLicenses.get(UNRECOGNISED.name().toLowerCase(US));
+                license = getLicense(licenseCode);
+                if (license == null) {
+                    license = mLicenses.get(UNRECOGNISED.name());
                 }
             } else {
-                license = mLicenses.get(NONE.name().toLowerCase(US));
+                license = mLicenses.get(NONE.name());
             }
             library.setLicense(license);
 
-            int iconRes = -1;
             String icon = library.getLibraryIcon();
             if (!TextUtils.isEmpty(icon)) {
-                iconRes = getResourceId(mContext, icon, "drawable");
-                if (iconRes <= 0) {
-                    iconRes = getResourceId(mContext, icon, "mipmap");
-                }
-                if (iconRes <= 0) {
-                    iconRes = android.R.drawable.sym_def_app_icon;
+                if (icon.contains("://")) {
+                    library.setIconUri(icon);
+                } else {
+                    int iconRes = getResourceId(mContext, icon, ResourceType.DRAWABLE);
+                    if (iconRes <= 0) {
+                        iconRes = getResourceId(mContext, icon, ResourceType.MIPMAP);
+                    }
+                    if (iconRes <= 0) {
+                        iconRes = android.R.drawable.sym_def_app_icon;
+                    }
+                    library.setIconResource(iconRes);
                 }
             }
-            library.setIconResource(iconRes);
-
-            mLibraries.add(library);
         }
+
+        mLibraries = Collections.unmodifiableList(newLibraries);
     }
 
     @NonNull
     public List<Library> getLibraries() {
-        return Collections.unmodifiableList(mLibraries);
+        return mLibraries;
+    }
+
+    @Nullable
+    private License getLicense(@NonNull String code) {
+        for (String entryCode : mLicenses.keySet()) {
+            if (code.equalsIgnoreCase(entryCode)) {
+                return mLicenses.get(entryCode);
+            }
+        }
+
+        String translatedCode = Legacy.translateLegacyCode(code);
+        if (!TextUtils.isEmpty(translatedCode)) {
+            // Try legacy migrated code
+            return getLicense(translatedCode);
+        }
+
+        // Not found
+        return null;
     }
 
     private void addLicense(@NonNull CoreLicense coreLicense, @StringRes int nameRes, @StringRes int urlRes, @StringRes int descRes) {
-        addLicense(coreLicense.name().toLowerCase(US), nameRes, urlRes, descRes);
+        addLicense(coreLicense.name(), nameRes, urlRes, descRes);
     }
 
     public void addLicense(@NonNull String key, @StringRes int nameRes, @StringRes int urlRes, @StringRes int descRes) {
@@ -181,5 +277,66 @@ public final class Homage {
             Log.e(TAG, "IOException reading license file: " + assetPath, e);
             return null;
         }
+    }
+
+    @Nullable
+    private static Library[] parseLibraries(@NonNull InputStream inputStream) {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder jsonBuilder = new StringBuilder();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonBuilder.append(line);
+            }
+
+            JSONObject json = new JSONObject(jsonBuilder.toString());
+
+            List<Library> libraries = new ArrayList<>();
+            JSONArray array = json.getJSONArray(JSON_KEY_LICENSES);
+            for (int i = 0 ; i < array.length(); i++) {
+                JSONObject object = array.getJSONObject(i);
+                libraries.add(parseLibrary(object));
+            }
+
+            return libraries.toArray(new Library[libraries.size()]);
+        } catch (IOException e) {
+            Log.e(TAG, "Exception reading input stream", e);
+            return null;
+        } catch (JSONException e) {
+            Log.e(TAG, "Exception parsing JSON", e);
+            return null;
+        } finally {
+            closeQuietly(reader);
+        }
+    }
+
+    @NonNull
+    private static Library parseLibrary(@NonNull JSONObject json) throws JSONException {
+        String name = getOptionalString(json, JSON_KEY_NAME);
+        String icon = getOptionalString(json, JSON_KEY_ICON);
+        String version = getOptionalString(json, JSON_KEY_VERSION);
+        String description = getOptionalString(json, JSON_KEY_DESCRIPTION);
+        String year = getOptionalString(json, JSON_KEY_YEAR);
+        String owner = getOptionalString(json, JSON_KEY_OWNER);
+        String ownerUrl = getOptionalString(json, JSON_KEY_OWNER_URL);
+        String url = getOptionalString(json, JSON_KEY_URL);
+        String license = getOptionalString(json, JSON_KEY_LICENSE);
+        return new Library(name, icon, version, description, year, owner, ownerUrl, url, license);
+    }
+
+    @Nullable
+    private static String getOptionalString(@NonNull JSONObject jsonObject, @NonNull String key) {
+        try {
+            return getString(jsonObject, key);
+        } catch (JSONException e) {
+            return null;
+        }
+    }
+
+    @Nullable
+    private static String getString(@NonNull JSONObject jsonObject, @NonNull String key) throws JSONException {
+        return jsonObject.getString(key);
     }
 }

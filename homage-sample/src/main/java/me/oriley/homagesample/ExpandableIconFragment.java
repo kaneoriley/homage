@@ -20,7 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import me.oriley.homage.Homage;
-import me.oriley.homage.recyclerview.HomageInfiniteAdapter;
 import me.oriley.homage.recyclerview.HomageView;
 
 @SuppressWarnings("WeakerAccess")
@@ -29,7 +28,7 @@ public final class ExpandableIconFragment extends RecyclerViewFragment {
     @NonNull
     @Override
     public RecyclerView.Adapter createAdapter() {
-        Homage homage = new Homage(getActivity(), R.raw.licenses);
+        Homage homage = new Homage(getActivity(), R.raw.licenses_nextfaze, R.raw.licenses_oriley, R.raw.licenses_base);
 
         // Adds a custom license definition to enable matching in your JSON list
         homage.addLicense("oriley", R.string.license_oriley_name, R.string.license_oriley_url, R.string.license_oriley_description);

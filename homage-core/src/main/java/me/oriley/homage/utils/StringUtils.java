@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *  You may obtain a copy of the License at
  *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package me.oriley.homage.recyclerview;
+package me.oriley.homage.utils;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
-final class StringUtils {
+public final class StringUtils {
 
 
     private StringUtils() {
@@ -28,7 +29,18 @@ final class StringUtils {
 
 
     @NonNull
-    static String nullToEmpty(@Nullable String value) {
+    public static String nullToEmpty(@Nullable String value) {
         return value != null ? value : "";
+    }
+
+    @Nullable
+    public static String firstNonEmpty(@NonNull String... values) {
+        for (String value : values) {
+            if (!TextUtils.isEmpty(value)) {
+                return value;
+            }
+        }
+
+        return null;
     }
 }

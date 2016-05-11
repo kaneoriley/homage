@@ -1,0 +1,24 @@
+{
+  "licenses": [
+    {
+      "name": "Power Adapters",
+      "icon": "library_power_adapters",
+      "version": "0.9.0",
+      "year": "2016",
+      "owner": "NextFaze",
+      "description": "Universal Android adapter interface combined with a collection of utility adapters like headers, loading indicators, and dividers.",
+      "url": "https://github.com/NextFaze/power-adapters",
+      "license": "apache2"
+    },
+    {
+      "name": "Power Data",
+      "icon": "library_power_data",
+      "version": "0.4.0",
+      "year": "2016",
+      "owner": "NextFaze",
+      "description": "Simplifies loading and management of asynchronous lists by encapsulating relevant states in a single interface.",
+      "url": "https://github.com/NextFaze/power-data",
+      "license": "apache2"
+    }
+  ]
+}

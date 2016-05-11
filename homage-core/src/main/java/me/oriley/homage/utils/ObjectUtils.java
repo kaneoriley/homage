@@ -14,29 +14,24 @@
  * limitations under the License.
  */
 
-package me.oriley.homage.recyclerview;
+package me.oriley.homage.utils;
 
 import android.support.annotation.NonNull;
-import me.oriley.homage.Homage;
-import me.oriley.homage.Library;
-import me.oriley.homage.recyclerview.HomageView.ExtraInfoMode;
 
-public class HomageInfiniteAdapter extends HomageAdapter {
+@SuppressWarnings("WeakerAccess")
+public final class ObjectUtils {
 
 
-    public HomageInfiniteAdapter(@NonNull Homage homage, @NonNull ExtraInfoMode extraInfoMode, boolean showIcons) {
-        super(homage, extraInfoMode, showIcons);
+    private ObjectUtils() {
+        throw new IllegalAccessError("no instances");
     }
 
 
-    @NonNull
-    @Override
-    public Library getItem(int position) {
-        return super.getItem(position % mLibraries.size());
-    }
-
-    @Override
-    public int getItemCount() {
-        return Integer.MAX_VALUE;
+    public static void validateNonNull(@NonNull Object... objects) {
+        for (Object object : objects) {
+            if (object == null) {
+                throw new NullPointerException("Object cannot be null");
+            }
+        }
     }
 }

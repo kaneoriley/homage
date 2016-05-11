@@ -20,20 +20,22 @@
     <group android:checkableBehavior="single">
         <item
                 android:id="@+id/nav_expandable"
-                android:icon="@drawable/ic_stars"
                 android:title="@string/drawer_expandable"/>
         <item
                 android:id="@+id/nav_popup"
-                android:icon="@drawable/ic_stars"
                 android:title="@string/drawer_popup"/>
         <item
                 android:id="@+id/nav_expandable_no_icons"
-                android:icon="@drawable/ic_stars"
                 android:title="@string/drawer_expandable_no_icon"/>
         <item
                 android:id="@+id/nav_popup_no_icons"
-                android:icon="@drawable/ic_stars"
                 android:title="@string/drawer_popup_no_icon"/>
+        <item
+                android:id="@+id/nav_dark_expandable"
+                android:title="@string/drawer_dark_expandable"/>
+        <item
+                android:id="@+id/nav_dark_popup"
+                android:title="@string/drawer_dark_popup"/>
     </group>
 
 </menu>

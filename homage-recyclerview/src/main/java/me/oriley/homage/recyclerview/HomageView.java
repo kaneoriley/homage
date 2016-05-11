@@ -16,9 +16,6 @@
 
 package me.oriley.homage.recyclerview;
 
-import android.animation.Animator;
-import android.animation.ValueAnimator;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -26,23 +23,20 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.*;
 
 import me.oriley.homage.Library;
 
-import static android.view.View.MeasureSpec.AT_MOST;
-import static android.view.View.MeasureSpec.UNSPECIFIED;
-import static me.oriley.homage.recyclerview.StringUtils.nullToEmpty;
+import static me.oriley.homage.utils.ObjectUtils.validateNonNull;
+import static me.oriley.homage.utils.StringUtils.nullToEmpty;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-public class HomageView extends CardView {
+public class HomageView extends HomageExpandableCardView {
 
     public enum ExtraInfoMode {
         EXPANDABLE, POPUP
@@ -50,7 +44,6 @@ public class HomageView extends CardView {
 
     private static final String TAG = HomageView.class.getSimpleName();
 
-    private static final int EXPAND_ANIMATION_MILLIS = 250;
     private static final float CHEVRON_ROTATION_AMOUNT = 180f;
 
     @NonNull
@@ -68,9 +61,6 @@ public class HomageView extends CardView {
     @NonNull
     private ImageView mWebButton;
 
-    @NonNull
-    private FrameLayout mExpandedContainer;
-
     @Nullable
     private Library mLibrary;
 
@@ -78,23 +68,23 @@ public class HomageView extends CardView {
     private ExtraInfoMode mExtraInfoMode = ExtraInfoMode.EXPANDABLE;
 
     // region expandedLayout
-    @Nullable
+
+    @NonNull
     private TextView mExpandedDescription;
 
-    @Nullable
+    @NonNull
     private TextView mExpandedLicenseName;
 
-    @Nullable
+    @NonNull
+    private TextView mExpandedLicenseRights;
+
+    @NonNull
     private TextView mExpandedLicenseDescription;
 
-    @Nullable
+    @NonNull
     private HorizontalScrollView mExpandedLicenseHolder;
 
-    @Nullable
-    private LinearLayout mExpandedLayout;
     // endregion expandedLayout
-
-    private boolean mAnimating;
 
     private boolean mShowIcons;
 
@@ -109,22 +99,43 @@ public class HomageView extends CardView {
 
     public HomageView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
+        setCollapsedLayoutResource(R.layout.homage_view_collapsed_layout);
+        setExpandedLayoutResource(R.layout.homage_view_expanded_layout);
     }
 
-    private void init(@NonNull Context context) {
-        View.inflate(context, R.layout.homage_view, this);
 
-        mTitleView = (TextView) findViewById(R.id.homage_view_title);
-        mIconView = (ImageView) findViewById(R.id.homage_view_icon);
-        mSummaryView = (TextView) findViewById(R.id.homage_view_summary);
-        mChevronView = (ImageView) findViewById(R.id.homage_view_chevron);
-        mWebButton = (ImageView) findViewById(R.id.homage_view_web_button);
-        mExpandedContainer = (FrameLayout) findViewById(R.id.homage_view_expanded_container);
+    @Override
+    protected void onCollapsedViewInflated(@NonNull View view) {
+        mTitleView = (TextView) view.findViewById(R.id.homage_view_title);
+        mIconView = (ImageView) view.findViewById(R.id.homage_view_icon);
+        mSummaryView = (TextView) view.findViewById(R.id.homage_view_summary);
+        mChevronView = (ImageView) view.findViewById(R.id.homage_view_chevron);
+        mWebButton = (ImageView) view.findViewById(R.id.homage_view_web_button);
+
+        validateNonNull(mTitleView, mIconView, mSummaryView, mChevronView, mWebButton);
 
         mTitleView.setTypeface(Typeface.DEFAULT_BOLD);
     }
 
+    @Override
+    protected void onExpandedViewInflated(@NonNull View view) {
+        mExpandedDescription = (TextView) view.findViewById(R.id.homage_view_expanded_description);
+        mExpandedLicenseName = (TextView) view.findViewById(R.id.homage_view_expanded_license_name);
+        mExpandedLicenseRights = (TextView) view.findViewById(R.id.homage_view_expanded_license_rights);
+        mExpandedLicenseDescription = (TextView) view.findViewById(R.id.homage_view_expanded_license_description);
+        mExpandedLicenseHolder = (HorizontalScrollView) view.findViewById(R.id.homage_view_expanded_license_holder);
+
+        validateNonNull(mExpandedDescription, mExpandedLicenseName, mExpandedLicenseDescription, mExpandedLicenseHolder);
+
+        mExpandedLicenseName.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
+        mExpandedLicenseRights.setTypeface(Typeface.MONOSPACE, Typeface.BOLD_ITALIC);
+        mExpandedLicenseDescription.setTypeface(Typeface.MONOSPACE);
+    }
+
+    @Override
+    protected void onExpandedAnimationUpdate(float level) {
+        mChevronView.setRotation(CHEVRON_ROTATION_AMOUNT * level);
+    }
 
     public void setLibrary(@Nullable Library library) {
         if (mLibrary != library) {
@@ -168,8 +179,8 @@ public class HomageView extends CardView {
     }
 
     public void showExtraInfo() {
-        if (mExtraInfoMode == ExtraInfoMode.EXPANDABLE && mExpandedLayout != null) {
-            toggleExpanded(mExpandedLayout);
+        if (mExtraInfoMode == ExtraInfoMode.EXPANDABLE) {
+            toggleExpanded();
         } else if (mExtraInfoMode == ExtraInfoMode.POPUP){
             showPopup();
         }
@@ -180,79 +191,20 @@ public class HomageView extends CardView {
 
         TextView descriptionView = (TextView) dialogView.findViewById(R.id.homage_view_popup_description);
         TextView licenseNameView = (TextView) dialogView.findViewById(R.id.homage_view_popup_license_name);
+        TextView licenseRightsView = (TextView) dialogView.findViewById(R.id.homage_view_popup_license_rights);
         TextView licenseDescriptionView = (TextView) dialogView.findViewById(R.id.homage_view_popup_license_description);
         View licenseHolder = dialogView.findViewById(R.id.homage_view_popup_license_holder);
 
         licenseNameView.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
+        licenseRightsView.setTypeface(Typeface.MONOSPACE, Typeface.BOLD_ITALIC);
         licenseDescriptionView.setTypeface(Typeface.MONOSPACE);
 
         updateDescription(descriptionView);
-        updateLicenseHolder(licenseHolder, licenseNameView, licenseDescriptionView);
+        updateLicenseHolder(licenseHolder, licenseNameView, licenseRightsView, licenseDescriptionView);
 
-        Dialog dialog = new AlertDialog.Builder(getContext())
-                .setView(dialogView)
-                .show();
-    }
-
-    private void toggleExpanded(@NonNull final View expandedLayout) {
-        if (mAnimating) {
-            return;
-        }
-
-        final boolean expanding = expandedLayout.getVisibility() != VISIBLE;
-        if (expanding) {
-            expandedLayout.setVisibility(View.VISIBLE);
-            expandedLayout.setEnabled(true);
-        }
-
-        // Note: Must post to container so that the layout can be measured
-        expandedLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                performAnimation(expandedLayout, expanding);
-            }
-        });
-    }
-
-    private void performAnimation(@NonNull final View expandedLayout, final boolean expanding) {
-        int containerWidth = expandedLayout.getMeasuredWidth();
-        expandedLayout.measure(MeasureSpec.makeMeasureSpec(containerWidth, AT_MOST), UNSPECIFIED);
-        final int containerHeight = expandedLayout.getMeasuredHeight();
-
-        expandedLayout.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(expanding ? 0f : 1f, expanding ? 1f : 0f);
-
-        valueAnimator.setDuration(EXPAND_ANIMATION_MILLIS);
-        valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float currentValue = (Float) animation.getAnimatedValue();
-                int height = (int) (currentValue * containerHeight);
-                expandedLayout.getLayoutParams().height = Math.max(height, 0);
-                expandedLayout.requestLayout();
-                expandedLayout.setAlpha(currentValue);
-                mChevronView.setRotation(CHEVRON_ROTATION_AMOUNT * currentValue);
-            }
-        });
-        valueAnimator.addListener(new SimpleAnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                mAnimating = true;
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                if (!expanding) {
-                    expandedLayout.setVisibility(View.GONE);
-                    expandedLayout.setEnabled(false);
-                }
-                expandedLayout.setLayerType(View.LAYER_TYPE_NONE, null);
-                mAnimating = false;
-            }
-        });
-
-        valueAnimator.start();
+        final Dialog dialog = new Dialog(getContext(), R.style.HomagePopupDialog);
+        dialog.setContentView(dialogView);
+        dialog.show();
     }
 
     private void updateViewIfBound() {
@@ -267,45 +219,13 @@ public class HomageView extends CardView {
         updateWebButton();
 
         if (mExtraInfoMode == ExtraInfoMode.EXPANDABLE) {
-            if (mExpandedLayout == null) {
-                mExpandedLayout = (LinearLayout) View.inflate(getContext(), R.layout.homage_view_expanded_layout, null);
-                mExpandedContainer.addView(mExpandedLayout);
-
-                if (mExpandedLayout == null) {
-                    throw new IllegalStateException("Invalid expanded view inflated");
-                }
-
-                mExpandedDescription = (TextView) mExpandedLayout.findViewById(R.id.homage_view_expanded_description);
-                mExpandedLicenseName = (TextView) mExpandedLayout.findViewById(R.id.homage_view_expanded_license_name);
-                mExpandedLicenseDescription = (TextView) mExpandedLayout.findViewById(R.id.homage_view_expanded_license_description);
-                mExpandedLicenseHolder = (HorizontalScrollView) mExpandedLayout.findViewById(R.id.homage_view_expanded_license_holder);
-
-                if (mExpandedDescription == null || mExpandedLicenseName == null || mExpandedLicenseDescription == null) {
-                    throw new IllegalStateException("Invalid expanded view inflated");
-                }
-
-                mExpandedLicenseName.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
-                mExpandedLicenseDescription.setTypeface(Typeface.MONOSPACE);
-            }
-
-            mExpandedLayout.setEnabled(false);
-            mExpandedLayout.getLayoutParams().height = 0;
-
-            if (mExpandedDescription != null) {
-                updateDescription(mExpandedDescription);
-            }
-            if (mExpandedLicenseHolder != null) {
-                updateLicenseHolder(mExpandedLicenseHolder, mExpandedLicenseName, mExpandedLicenseDescription);
-            }
-
-            mExpandedLayout.setVisibility(View.GONE);
+            resetExpandedState();
+            updateDescription(mExpandedDescription);
+            updateLicenseHolder(mExpandedLicenseHolder, mExpandedLicenseName, mExpandedLicenseRights,
+                    mExpandedLicenseDescription);
             mChevronView.setVisibility(VISIBLE);
             mChevronView.setRotation(0f);
         } else {
-            if (mExpandedLayout != null) {
-                mExpandedContainer.removeView(mExpandedLayout);
-                mExpandedLayout = null;
-            }
             mChevronView.setVisibility(GONE);
         }
     }
@@ -341,12 +261,18 @@ public class HomageView extends CardView {
         }
     }
 
-    private void updateLicenseHolder(@NonNull View holder, @Nullable TextView nameView, @Nullable TextView descriptionView) {
+    private void updateLicenseHolder(@NonNull View holder,
+                                     @Nullable TextView nameView,
+                                     @Nullable TextView rightsView,
+                                     @Nullable TextView descriptionView) {
         String licenseName = mLibrary != null ? mLibrary.getLicenseName() : null;
         Spanned licenseDescription = mLibrary != null ? mLibrary.getLicenseDescription() : null;
 
         if (nameView != null) {
             updateTextView(nameView, licenseName);
+        }
+        if (rightsView != null) {
+            updateLicenseRights(rightsView);
         }
         if (descriptionView != null) {
             updateTextView(descriptionView, licenseDescription);
@@ -359,12 +285,19 @@ public class HomageView extends CardView {
         }
     }
 
-    private void updateLicenseName(@NonNull TextView view) {
-        updateTextView(view, mLibrary != null ? mLibrary.getLicenseName() : null);
-    }
+    private void updateLicenseRights(@NonNull TextView view) {
+        Context context = getContext();
+        String ownerInfo = createSummary();
+        String reserved = context.getString(R.string.homage_all_rights_reserved);
 
-    private void updateLicenseDescription(@NonNull TextView view) {
-        updateTextView(view, mLibrary != null ? mLibrary.getLicenseDescription() : null);
+        String rightsText;
+        if (ownerInfo != null) {
+            rightsText = context.getString(R.string.homage_copyright, ownerInfo, reserved);
+        } else {
+            rightsText = reserved;
+        }
+
+        updateTextView(view, rightsText);
     }
 
     private void updateTitle() {
@@ -378,27 +311,22 @@ public class HomageView extends CardView {
     }
 
     private void updateSummary() {
+        updateTextView(mSummaryView, createSummary());
+    }
+
+    @Nullable
+    private String createSummary() {
         String owner = mLibrary != null ? mLibrary.getLibraryOwner() : null;
         String year = mLibrary != null ? mLibrary.getLibraryYear() : null;
         if (TextUtils.isEmpty(owner) && TextUtils.isEmpty(year)) {
-            updateTextView(mSummaryView, (String) null);
+            return null;
         } else {
             String joiner = ", ";
             if (year == null || owner == null) {
                 joiner = "";
             }
 
-            updateTextView(mSummaryView, nullToEmpty(year) + joiner + nullToEmpty(owner));
+            return nullToEmpty(year) + joiner + nullToEmpty(owner);
         }
-    }
-
-    private void updateTextView(@NonNull TextView view, @Nullable Spanned text) {
-        view.setText(text);
-        view.setVisibility(!TextUtils.isEmpty(text) ? VISIBLE : GONE);
-    }
-
-    private void updateTextView(@NonNull TextView view, @Nullable String text) {
-        view.setText(text);
-        view.setVisibility(!TextUtils.isEmpty(text) ? VISIBLE : GONE);
     }
 }

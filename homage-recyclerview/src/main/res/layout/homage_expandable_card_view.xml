@@ -15,18 +15,23 @@
   ~ limitations under the License.
   -->
 
-<resources>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <color name="color_primary">@color/md_red_500</color>
-    <color name="color_primary_dark">@color/md_red_700</color>
-    <color name="color_accent">@color/md_red_A200</color>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <color name="window_background">#fffafafa</color>
+        <ViewStub
+                android:id="@+id/homage_expandable_card_view_collapsed_stub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <color name="window_background_dark">#323232</color>
+        <ViewStub
+                android:id="@+id/homage_expandable_card_view_expanded_stub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <color name="nav_drawer_header_gradient_start">@color/md_red_300</color>
-    <color name="nav_drawer_header_gradient_center">@color/md_red_500</color>
-    <color name="nav_drawer_header_gradient_end">@color/md_red_800</color>
+    </LinearLayout>
 
-</resources>
+</merge>
