@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## Version 0.1.1
+## Version 0.1.2
 
 _2016-05-11_
 

@@ -21,6 +21,7 @@
         android:theme="@style/HomageCard.Light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="?attr/cardBackgroundColor"
         app:contentPadding="@dimen/homage_recycler_item_content_padding"
         app:cardElevation="@dimen/homage_recycler_item_elevation"
         app:cardCornerRadius="@dimen/homage_recycler_item_corner_radius"
