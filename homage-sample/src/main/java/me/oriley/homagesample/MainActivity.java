@@ -122,6 +122,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_popup_no_icons:
                 openDrawerFragment(PopupFragment.class, id);
                 break;
+            case R.id.nav_dark_expandable:
+                openDrawerFragment(DarkExpandableFragment.class, id);
+                break;
+            case R.id.nav_dark_popup:
+                openDrawerFragment(DarkPopupFragment.class, id);
+                break;
         }
 
         closeDrawer();

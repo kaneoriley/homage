@@ -39,19 +39,26 @@ public class HomageAdapter extends RecyclerView.Adapter<HomageViewHolder> {
 
     private final boolean mShowIcons;
 
+    private final boolean mDark;
+
 
     public HomageAdapter(@NonNull Homage homage, @NonNull ExtraInfoMode extraInfoMode, boolean showIcons) {
+        this(homage, extraInfoMode, showIcons, false);
+    }
+
+    public HomageAdapter(@NonNull Homage homage, @NonNull ExtraInfoMode extraInfoMode, boolean showIcons, boolean dark) {
         mHomage = homage;
         mLibraries = mHomage.getLibraries();
         mExtraInfoMode = extraInfoMode;
         mShowIcons = showIcons;
+        mDark = dark;
     }
 
 
     @Override
     public HomageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         HomageView view = (HomageView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.homage_recycler_item, parent, false);
+                .inflate(mDark ? R.layout.homage_recycler_item_dark : R.layout.homage_recycler_item_light, parent, false);
         view.setExtraInfoMode(mExtraInfoMode);
         view.setShowIcons(mShowIcons);
         return new HomageViewHolder(view);

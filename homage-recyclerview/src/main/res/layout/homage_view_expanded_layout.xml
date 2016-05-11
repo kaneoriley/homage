@@ -21,11 +21,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <View android:layout_width="match_parent"
+    <View android:id="@+id/homage_view_expanded_divider"
+          android:layout_width="match_parent"
           android:layout_height="@dimen/homage_divider_height"
           android:layout_marginTop="@dimen/homage_expanded_view_divider_vertical_margin"
           android:layout_marginBottom="@dimen/homage_expanded_view_divider_vertical_margin"
-          android:background="@color/homage_divider"/>
+          android:background="?attr/homageDividerColor"/>
 
     <TextView
             android:id="@+id/homage_view_expanded_description"
@@ -33,13 +34,14 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/homage_expanded_view_description_padding"
             android:layout_marginBottom="@dimen/homage_expanded_view_description_margin_bottom"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="?attr/homageTextPrimaryColor"/>
 
     <HorizontalScrollView
             android:id="@+id/homage_view_expanded_license_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/homage_license_background">
+            android:background="?attr/homageLicenseBackgroundColor">
 
         <LinearLayout
                 android:layout_width="wrap_content"
@@ -53,6 +55,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/homage_expanded_view_license_text_padding"
                     android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="?attr/homageTextPrimaryColor"
                     android:textSize="@dimen/homage_license_title_text_size"/>
 
             <TextView
@@ -61,6 +64,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/homage_expanded_view_license_text_padding"
                     android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="?attr/homageTextPrimaryColor"
                     android:textSize="@dimen/homage_license_rights_text_size"/>
 
             <TextView
@@ -69,6 +73,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/homage_expanded_view_license_text_padding"
                     android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?attr/homageTextSecondaryColor"
                     android:textSize="@dimen/homage_license_description_text_size"/>
 
         </LinearLayout>

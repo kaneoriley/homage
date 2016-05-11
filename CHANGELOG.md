@@ -8,6 +8,7 @@ Change Log
     project.
  *  Various optimisations to the expanded card view and license model
  *  Add support for specifying an owner URL, and an icon Uri (for use in your own adapters)
+ *  Add dark theme option to HomageAdapter (homage-recyclerview)
 
 ## Version 0.1.0
 

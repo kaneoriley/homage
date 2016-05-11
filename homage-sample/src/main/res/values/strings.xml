@@ -28,6 +28,8 @@
     <string name="drawer_popup">Popup</string>
     <string name="drawer_expandable_no_icon">Expandable w/o Icons</string>
     <string name="drawer_popup_no_icon">Popup w/o Icons</string>
+    <string name="drawer_dark_expandable">Expandable Dark</string>
+    <string name="drawer_dark_popup">Popup Dark</string>
 
     <string name="license_oriley_name">The O\'Riley License (TM)</string>
     <string name="license_oriley_url">http://oriley.me</string>

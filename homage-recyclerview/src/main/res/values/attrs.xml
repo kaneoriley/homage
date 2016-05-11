@@ -4,7 +4,7 @@
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License")
   ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
+  ~  You may obtain a copy of the License at
   ~
   ~    http://www.apache.org/licenses/LICENSE-2.0
   ~
@@ -17,16 +17,13 @@
 
 <resources>
 
-    <color name="color_primary">@color/md_red_500</color>
-    <color name="color_primary_dark">@color/md_red_700</color>
-    <color name="color_accent">@color/md_red_A200</color>
-
-    <color name="window_background">#fffafafa</color>
-
-    <color name="window_background_dark">#323232</color>
-
-    <color name="nav_drawer_header_gradient_start">@color/md_red_300</color>
-    <color name="nav_drawer_header_gradient_center">@color/md_red_500</color>
-    <color name="nav_drawer_header_gradient_end">@color/md_red_800</color>
+    <declare-styleable name="HomageView">
+        <attr name="homageTextPrimaryColor" format="color" />
+        <attr name="homageTextSecondaryColor" format="color" />
+        <attr name="homageLicenseBackgroundColor" format="color" />
+        <attr name="homageDividerColor" format="color" />
+        <attr name="homageChevronDrawable" format="reference" />
+        <attr name="homageLinkDrawable" format="reference" />
+    </declare-styleable>
 
 </resources>

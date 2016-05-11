@@ -16,7 +16,6 @@
 
 package me.oriley.homage.recyclerview;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -203,9 +202,9 @@ public class HomageView extends HomageExpandableCardView {
         updateDescription(descriptionView);
         updateLicenseHolder(licenseHolder, licenseNameView, licenseRightsView, licenseDescriptionView);
 
-        Dialog dialog = new AlertDialog.Builder(getContext())
-                .setView(dialogView)
-                .show();
+        final Dialog dialog = new Dialog(getContext(), R.style.HomagePopupDialog);
+        dialog.setContentView(dialogView);
+        dialog.show();
     }
 
     private void updateViewIfBound() {

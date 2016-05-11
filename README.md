@@ -79,8 +79,8 @@ public String getIconUri();
 
 The add-on module `homage-recyclerview` contains a simple adapter you can use to handle all the view binding
 and library display logic (you can check it out for yourself in the sample application). The constructor takes three
-parameters, a `Homage` instance, the extra info display mode, and whether or not to show icons. Some examples (all used
-in the sample application):
+parameters: a `Homage` instance, the extra info display mode, and whether or not to show icons. There is an optional
+fourth boolean parameter to enable the dark theme (defaults to false). Some examples (all used in the sample application):
 
 ```java
 // Expandable views with icons
@@ -94,6 +94,12 @@ HomageAdapter homageAdapter = new HomageAdapter(mHomage, HomageView.ExtraInfoMod
 
 // Popup views with no icons
 HomageAdapter homageAdapter = new HomageAdapter(mHomage, HomageView.ExtraInfoMode.POPUP, false);
+
+// Expandable views with icons and dark theme
+HomageAdapter homageAdapter = new HomageAdapter(mHomage, HomageView.ExtraInfoMode.EXPANDABLE, true, true);
+
+// Popup views with icons and dark theme
+HomageAdapter homageAdapter = new HomageAdapter(mHomage, HomageView.ExtraInfoMode.POPUP, true, true);
 ```
 
 Now all you need is a `RecyclerView` to set the adapter to:

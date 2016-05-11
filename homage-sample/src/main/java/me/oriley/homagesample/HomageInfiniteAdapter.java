@@ -14,18 +14,24 @@
  * limitations under the License.
  */
 
-package me.oriley.homage.recyclerview;
+package me.oriley.homagesample;
 
 import android.support.annotation.NonNull;
 import me.oriley.homage.Homage;
 import me.oriley.homage.Library;
+import me.oriley.homage.recyclerview.HomageAdapter;
 import me.oriley.homage.recyclerview.HomageView.ExtraInfoMode;
 
-public class HomageInfiniteAdapter extends HomageAdapter {
+class HomageInfiniteAdapter extends HomageAdapter {
 
 
-    public HomageInfiniteAdapter(@NonNull Homage homage, @NonNull ExtraInfoMode extraInfoMode, boolean showIcons) {
-        super(homage, extraInfoMode, showIcons);
+    HomageInfiniteAdapter(@NonNull Homage homage, @NonNull ExtraInfoMode extraInfoMode, boolean showIcons) {
+        this(homage, extraInfoMode, showIcons, false);
+    }
+
+    HomageInfiniteAdapter(@NonNull Homage homage, @NonNull ExtraInfoMode extraInfoMode, boolean showIcons,
+                                 boolean dark) {
+        super(homage, extraInfoMode, showIcons, dark);
     }
 
 

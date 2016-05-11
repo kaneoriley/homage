@@ -34,7 +34,9 @@
 
     <dimen name="homage_popup_view_description_padding">16dp</dimen>
     <dimen name="homage_popup_view_divider_vertical_margin">16dp</dimen>
+    <dimen name="homage_popup_view_license_holder_margin">8dp</dimen>
     <dimen name="homage_popup_view_license_text_padding">8dp</dimen>
     <dimen name="homage_popup_view_scroll_padding">12dp</dimen>
+    <dimen name="homage_popup_view_layout_margin">16dp</dimen>
 
 </resources>

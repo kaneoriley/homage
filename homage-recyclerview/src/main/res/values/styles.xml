@@ -21,4 +21,31 @@
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
+    <style name="HomageCard"/>
+
+    <style name="HomageCard.Light">
+        <item name="cardBackgroundColor">@color/homage_card_background_light</item>
+        <item name="homageTextPrimaryColor">@color/homage_text_primary_light</item>
+        <item name="homageTextSecondaryColor">@color/homage_text_secondary_light</item>
+        <item name="homageLicenseBackgroundColor">@color/homage_license_background_light</item>
+        <item name="homageDividerColor">@color/homage_divider_light</item>
+        <item name="homageChevronDrawable">@drawable/homage_down_chevron_light</item>
+        <item name="homageLinkDrawable">@drawable/homage_ic_link_light</item>
+    </style>
+
+    <style name="HomageCard.Dark">
+        <item name="cardBackgroundColor">@color/homage_card_background_dark</item>
+        <item name="homageTextPrimaryColor">@color/homage_text_primary_dark</item>
+        <item name="homageTextSecondaryColor">@color/homage_text_secondary_dark</item>
+        <item name="homageLicenseBackgroundColor">@color/homage_license_background_dark</item>
+        <item name="homageDividerColor">@color/homage_divider_dark</item>
+        <item name="homageChevronDrawable">@drawable/homage_down_chevron_dark</item>
+        <item name="homageLinkDrawable">@drawable/homage_ic_link_dark</item>
+    </style>
+
+    <style name="HomagePopupDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@android:color/transparent</item>
+    </style>
+
 </resources>

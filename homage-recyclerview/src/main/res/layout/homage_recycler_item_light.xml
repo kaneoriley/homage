@@ -18,10 +18,10 @@
 <me.oriley.homage.recyclerview.HomageView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:theme="@style/HomageCard.Light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:contentPadding="@dimen/homage_recycler_item_content_padding"
-        app:cardBackgroundColor="@android:color/white"
         app:cardElevation="@dimen/homage_recycler_item_elevation"
         app:cardCornerRadius="@dimen/homage_recycler_item_corner_radius"
         app:cardPreventCornerOverlap="false"

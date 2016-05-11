@@ -20,7 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import me.oriley.homage.Homage;
-import me.oriley.homage.recyclerview.HomageInfiniteAdapter;
 import me.oriley.homage.recyclerview.HomageView;
 
 @SuppressWarnings("WeakerAccess")
