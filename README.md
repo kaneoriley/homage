@@ -3,8 +3,8 @@
 [![Build Status](https://travis-ci.org/oriley-me/homage.svg?branch=master)](https://travis-ci.org/oriley-me/homage)
 [![Dependency Status](https://www.versioneye.com/user/projects/570cea97fcd19a00518553df/badge.svg?style=flat)](https://www.versioneye.com/user/projects/570cea97fcd19a00518553df)<br/>
 
-<a href="http://www.methodscount.com/?lib=me.oriley.homage%3Ahomage-core%3A0.1.0"><img src="https://img.shields.io/badge/homage_core-methods: 97 | deps: 20 | size: 15 KB-f44336.svg"></img></a>
-<a href="http://www.methodscount.com/?lib=me.oriley.homage%3Ahomage-recyclerview%3A0.1.0"><img src="https://img.shields.io/badge/homage_recyclerview-methods: 146 | deps: 11757 | size: 18 KB-ff9800.svg"></img></a>
+<a href="http://www.methodscount.com/?lib=me.oriley.homage%3Ahomage-core%3A0.1.1"><img src="https://img.shields.io/badge/homage_core-methods: 128 | deps: 20 | size: 20 KB-f44336.svg"></img></a><br/>
+<a href="http://www.methodscount.com/?lib=me.oriley.homage%3Ahomage-recyclerview%3A0.1.1"><img src="https://img.shields.io/badge/homage_recyclerview-methods: 161 | deps: 11815 | size: 20 KB-ff9800.svg"></img></a>
 
 # Homage
 ![Logo](artwork/icon.png)
@@ -184,10 +184,10 @@ repositories {
 ```gradle
 dependencies {
     // Required
-    compile 'me.oriley.homage:homage-core:0.1.0'
+    compile 'com.github.oriley-me.homage:homage-core:0.1.1'
 
     // Optional, only needed if you want to use the included widgets instead of rolling your own
-    compile 'me.oriley.homage:homage-recyclerview:0.1.0'
+    compile 'com.github.oriley-me.homage:homage-recyclerview:0.1.1'
 }
 ```
 
