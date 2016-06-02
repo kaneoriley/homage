@@ -111,22 +111,25 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         switch (id) {
             case R.id.nav_expandable:
-                openDrawerFragment(ExpandableIconFragment.class, id);
+                openDrawerFragment(ExpandableCardIconFragment.class, id);
                 break;
             case R.id.nav_popup:
-                openDrawerFragment(PopupIconFragment.class, id);
+                openDrawerFragment(PopupCardIconFragment.class, id);
                 break;
             case R.id.nav_expandable_no_icons:
-                openDrawerFragment(ExpandableFragment.class, id);
+                openDrawerFragment(ExpandableCardFragment.class, id);
                 break;
             case R.id.nav_popup_no_icons:
-                openDrawerFragment(PopupFragment.class, id);
+                openDrawerFragment(PopupCardFragment.class, id);
                 break;
             case R.id.nav_dark_expandable:
-                openDrawerFragment(DarkExpandableFragment.class, id);
+                openDrawerFragment(DarkExpandableCardFragment.class, id);
                 break;
             case R.id.nav_dark_popup:
-                openDrawerFragment(DarkPopupFragment.class, id);
+                openDrawerFragment(DarkCardPopupFragment.class, id);
+                break;
+            case R.id.nav_expandable_no_card:
+                openDrawerFragment(ExpandableIconFragment.class, id);
                 break;
         }
 

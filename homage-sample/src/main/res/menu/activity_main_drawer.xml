@@ -34,8 +34,12 @@
                 android:id="@+id/nav_dark_expandable"
                 android:title="@string/drawer_dark_expandable"/>
         <item
-                android:id="@+id/nav_dark_popup"
-                android:title="@string/drawer_dark_popup"/>
+            android:id="@+id/nav_dark_popup"
+            android:title="@string/drawer_dark_popup"/>
+
+        <item
+            android:id="@+id/nav_expandable_no_card"
+            android:title="@string/drawer_expandable_no_card"/>
     </group>
 
 </menu>

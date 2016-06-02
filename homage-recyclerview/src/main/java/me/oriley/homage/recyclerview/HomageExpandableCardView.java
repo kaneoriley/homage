@@ -22,20 +22,20 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import static android.view.View.MeasureSpec.AT_MOST;
 import static android.view.View.MeasureSpec.UNSPECIFIED;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-public abstract class HomageExpandableCardView extends CardView {
+public abstract class HomageExpandableCardView extends FrameLayout {
 
     private static final int EXPAND_ANIMATION_MILLIS = 250;
 
@@ -52,7 +52,6 @@ public abstract class HomageExpandableCardView extends CardView {
     private View mExpandedView;
 
     private boolean mAnimating;
-
 
     public HomageExpandableCardView(@NonNull Context context) {
         this(context, null);
@@ -71,7 +70,6 @@ public abstract class HomageExpandableCardView extends CardView {
         mCollapsedView = mCollapsedStub;
         mExpandedView = mExpandedStub;
     }
-
 
     protected void setCollapsedLayoutResource(@LayoutRes int layoutResource) {
         if (mCollapsedStub.getLayoutResource() != layoutResource) {
