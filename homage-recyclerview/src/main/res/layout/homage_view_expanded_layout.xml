@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (C) 2016 Kane O'Riley
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License")
@@ -81,13 +82,5 @@
         </LinearLayout>
 
     </HorizontalScrollView>
-
-    <View
-        android:id="@+id/homage_view_expanded_divider_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/homage_divider_height"
-        android:layout_marginBottom="@dimen/homage_expanded_view_divider_vertical_margin"
-        android:layout_marginTop="@dimen/homage_expanded_view_divider_vertical_margin"
-        android:background="?attr/homageExpandedTopBottomDividerColor" />
 
 </LinearLayout>

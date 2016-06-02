@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (C) 2016 Kane O'Riley
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License")
@@ -18,12 +19,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-    <View
-        android:id="@+id/homage_view_divider_top"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/homage_divider_height"
-        android:background="?attr/homageExpandedTopBottomDividerColor" />
 
     <RelativeLayout
         android:layout_width="match_parent"

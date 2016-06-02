@@ -24,6 +24,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import me.oriley.homage.Homage;
+import me.oriley.homage.recyclerview.DividerItemDecoration;
 import me.oriley.homage.recyclerview.HomageView;
 
 @SuppressWarnings("WeakerAccess")
@@ -34,6 +35,7 @@ public final class DarkPopupFragment extends RecyclerViewFragment {
         super.onViewCreated(view, savedInstanceState);
         view.setBackgroundResource(R.color.window_background_dark);
         mRecyclerView.setPadding(0, 0, 0, 0);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), true));
     }
 
     @NonNull

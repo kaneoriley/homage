@@ -61,9 +61,6 @@ public class HomageView extends HomageExpandableView {
     @NonNull
     private ImageView mWebButton;
 
-    @NonNull
-    private View mDividerTop;
-
     @Nullable
     private Library mLibrary;
 
@@ -114,8 +111,6 @@ public class HomageView extends HomageExpandableView {
         mSummaryView = (TextView) view.findViewById(R.id.homage_view_summary);
         mChevronView = (ImageView) view.findViewById(R.id.homage_view_chevron);
         mWebButton = (ImageView) view.findViewById(R.id.homage_view_web_button);
-        mDividerTop = view.findViewById(R.id.homage_view_divider_top);
-        mDividerTop.setAlpha(0);
 
         validateNonNull(mTitleView, mIconView, mSummaryView, mChevronView, mWebButton);
 
@@ -140,7 +135,6 @@ public class HomageView extends HomageExpandableView {
     @Override
     protected void onExpandedAnimationUpdate(float level) {
         mChevronView.setRotation(CHEVRON_ROTATION_AMOUNT * level);
-        mDividerTop.setAlpha(level);
     }
 
     public void setLibrary(@Nullable Library library) {
