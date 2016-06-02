@@ -131,6 +131,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_expandable_no_card:
                 openDrawerFragment(ExpandableIconFragment.class, id);
                 break;
+            case R.id.nav_expandable_no_card_no_icons:
+                openDrawerFragment(ExpandableFragment.class, id);
+                break;
+            case R.id.nav_dark_popup_no_card_no_icons:
+                openDrawerFragment(DarkPopupFragment.class, id);
+                break;
         }
 
         closeDrawer();

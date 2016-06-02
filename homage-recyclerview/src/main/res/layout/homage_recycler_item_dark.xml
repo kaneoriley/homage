@@ -19,4 +19,4 @@
     android:layout_height="wrap_content"
     android:background="?attr/cardBackgroundColor"
     android:padding="16dp"
-    android:theme="@style/HomageCard.Dark" />
+    android:theme="@style/Homage.Dark" />

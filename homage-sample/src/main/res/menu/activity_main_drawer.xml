@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2016 Kane O'Riley
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License")
@@ -19,27 +18,32 @@
 
     <group android:checkableBehavior="single">
         <item
-                android:id="@+id/nav_expandable"
-                android:title="@string/drawer_expandable"/>
+            android:id="@+id/nav_expandable"
+            android:title="@string/drawer_expandable" />
         <item
-                android:id="@+id/nav_popup"
-                android:title="@string/drawer_popup"/>
+            android:id="@+id/nav_popup"
+            android:title="@string/drawer_popup" />
         <item
-                android:id="@+id/nav_expandable_no_icons"
-                android:title="@string/drawer_expandable_no_icon"/>
+            android:id="@+id/nav_expandable_no_icons"
+            android:title="@string/drawer_expandable_no_icon" />
         <item
-                android:id="@+id/nav_popup_no_icons"
-                android:title="@string/drawer_popup_no_icon"/>
+            android:id="@+id/nav_popup_no_icons"
+            android:title="@string/drawer_popup_no_icon" />
         <item
-                android:id="@+id/nav_dark_expandable"
-                android:title="@string/drawer_dark_expandable"/>
+            android:id="@+id/nav_dark_expandable"
+            android:title="@string/drawer_dark_expandable" />
         <item
             android:id="@+id/nav_dark_popup"
-            android:title="@string/drawer_dark_popup"/>
-
+            android:title="@string/drawer_dark_popup" />
         <item
             android:id="@+id/nav_expandable_no_card"
-            android:title="@string/drawer_expandable_no_card"/>
+            android:title="@string/drawer_expandable_no_card" />
+        <item
+            android:id="@+id/nav_expandable_no_card_no_icons"
+            android:title="@string/drawer_expandable_no_card_no_icon" />
+        <item
+            android:id="@+id/nav_dark_popup_no_card_no_icons"
+            android:title="@string/drawer_dark_popup_no_card_no_icon" />
     </group>
 
 </menu>

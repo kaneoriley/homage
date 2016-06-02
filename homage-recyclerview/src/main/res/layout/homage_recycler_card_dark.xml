@@ -17,16 +17,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="@style/HomageCard.Dark"
+    android:theme="@style/Homage.Dark.Card"
     app:cardBackgroundColor="?attr/cardBackgroundColor"
-    app:cardCornerRadius="@dimen/homage_recycler_item_corner_radius"
-    app:cardElevation="@dimen/homage_recycler_item_elevation"
+    app:cardCornerRadius="@dimen/homage_recycler_card_corner_radius"
+    app:cardElevation="@dimen/homage_recycler_card_elevation"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true"
-    app:contentPadding="@dimen/homage_recycler_item_content_padding">
+    app:contentPadding="@dimen/homage_recycler_card_content_padding">
 
     <me.oriley.homage.recyclerview.HomageView
-        android:id="@+id/homageView"
+        android:id="@+id/homage_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

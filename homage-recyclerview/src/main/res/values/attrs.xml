@@ -24,6 +24,10 @@
         <attr name="homageDividerColor" format="color" />
         <attr name="homageChevronDrawable" format="reference" />
         <attr name="homageLinkDrawable" format="reference" />
+        <attr name="homageExpandedTopBottomDividerColor" format="color" />
+        <attr name="homageInnerPadding" format="dimension" />
+        <attr name="homageDescriptionPadding" format="dimension" />
+        <attr name="homageDividerVerticalMargin" format="dimension" />
     </declare-styleable>
 
 </resources>

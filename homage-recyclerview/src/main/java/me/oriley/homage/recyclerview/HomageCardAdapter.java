@@ -21,7 +21,7 @@ public class HomageCardAdapter extends HomageAdapterBase {
     public HomageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(mDark ? R.layout.homage_recycler_card_dark : R.layout.homage_recycler_card_light, parent, false);
-        HomageView homage = (HomageView) view.findViewById(R.id.homageView);
+        HomageView homage = (HomageView) view.findViewById(R.id.homage_view);
         homage.setExtraInfoMode(mExtraInfoMode);
         homage.setShowIcons(mShowIcons);
         return new HomageViewHolder(view, homage);

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2016 Kane O'Riley
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License")
@@ -21,26 +20,47 @@
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
-    <style name="HomageCard"/>
+    <style name="Homage">
+        <item name="homageInnerPadding">@dimen/homage_recycler_item_content_padding</item>
+        <item name="homageDividerVerticalMargin">0dp</item>
+        <item name="homageDividerColor">@android:color/transparent</item>
+        <item name="homageDescriptionPadding">@dimen/homage_recycler_item_content_padding</item>
+    </style>
 
-    <style name="HomageCard.Light">
+    <style name="Homage.Light">
         <item name="cardBackgroundColor">@color/homage_card_background_light</item>
         <item name="homageTextPrimaryColor">@color/homage_text_primary_light</item>
         <item name="homageTextSecondaryColor">@color/homage_text_secondary_light</item>
         <item name="homageLicenseBackgroundColor">@color/homage_license_background_light</item>
-        <item name="homageDividerColor">@color/homage_divider_light</item>
+        <item name="homageExpandedTopBottomDividerColor">@color/homage_divider_light</item>
         <item name="homageChevronDrawable">@drawable/homage_down_chevron_light</item>
         <item name="homageLinkDrawable">@drawable/homage_ic_link_light</item>
     </style>
 
-    <style name="HomageCard.Dark">
+    <style name="Homage.Dark">
         <item name="cardBackgroundColor">@color/homage_card_background_dark</item>
         <item name="homageTextPrimaryColor">@color/homage_text_primary_dark</item>
         <item name="homageTextSecondaryColor">@color/homage_text_secondary_dark</item>
         <item name="homageLicenseBackgroundColor">@color/homage_license_background_dark</item>
-        <item name="homageDividerColor">@color/homage_divider_dark</item>
+        <item name="homageExpandedTopBottomDividerColor">@color/homage_divider_dark</item>
         <item name="homageChevronDrawable">@drawable/homage_down_chevron_dark</item>
         <item name="homageLinkDrawable">@drawable/homage_ic_link_dark</item>
+    </style>
+
+    <style name="Homage.Light.Card">
+        <item name="homageDividerColor">@color/homage_divider_light</item>
+        <item name="homageExpandedTopBottomDividerColor">@android:color/transparent</item>
+        <item name="homageDividerVerticalMargin">@dimen/homage_expanded_view_divider_vertical_margin</item>
+        <item name="homageInnerPadding">0dp</item>
+        <item name="homageDescriptionPadding">@dimen/homage_expanded_view_description_padding</item>
+    </style>
+
+    <style name="Homage.Dark.Card">
+        <item name="homageDividerColor">@color/homage_divider_dark</item>
+        <item name="homageExpandedTopBottomDividerColor">@android:color/transparent</item>
+        <item name="homageDividerVerticalMargin">@dimen/homage_expanded_view_divider_vertical_margin</item>
+        <item name="homageInnerPadding">0dp</item>
+        <item name="homageDescriptionPadding">@dimen/homage_expanded_view_description_padding</item>
     </style>
 
     <style name="HomagePopupDialog" parent="@android:style/Theme.Dialog">

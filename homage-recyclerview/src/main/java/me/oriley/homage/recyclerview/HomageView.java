@@ -36,7 +36,7 @@ import static me.oriley.homage.utils.ObjectUtils.validateNonNull;
 import static me.oriley.homage.utils.StringUtils.nullToEmpty;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-public class HomageView extends HomageExpandableCardView {
+public class HomageView extends HomageExpandableView {
 
     public enum ExtraInfoMode {
         EXPANDABLE, POPUP
@@ -60,6 +60,9 @@ public class HomageView extends HomageExpandableCardView {
 
     @NonNull
     private ImageView mWebButton;
+
+    @NonNull
+    private View mDividerTop;
 
     @Nullable
     private Library mLibrary;
@@ -111,6 +114,8 @@ public class HomageView extends HomageExpandableCardView {
         mSummaryView = (TextView) view.findViewById(R.id.homage_view_summary);
         mChevronView = (ImageView) view.findViewById(R.id.homage_view_chevron);
         mWebButton = (ImageView) view.findViewById(R.id.homage_view_web_button);
+        mDividerTop = view.findViewById(R.id.homage_view_divider_top);
+        mDividerTop.setAlpha(0);
 
         validateNonNull(mTitleView, mIconView, mSummaryView, mChevronView, mWebButton);
 
@@ -135,6 +140,7 @@ public class HomageView extends HomageExpandableCardView {
     @Override
     protected void onExpandedAnimationUpdate(float level) {
         mChevronView.setRotation(CHEVRON_ROTATION_AMOUNT * level);
+        mDividerTop.setAlpha(level);
     }
 
     public void setLibrary(@Nullable Library library) {

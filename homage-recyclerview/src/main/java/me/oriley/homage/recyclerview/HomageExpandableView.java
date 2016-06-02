@@ -35,7 +35,7 @@ import static android.view.View.MeasureSpec.AT_MOST;
 import static android.view.View.MeasureSpec.UNSPECIFIED;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-public abstract class HomageExpandableCardView extends FrameLayout {
+public abstract class HomageExpandableView extends FrameLayout {
 
     private static final int EXPAND_ANIMATION_MILLIS = 250;
 
@@ -53,15 +53,15 @@ public abstract class HomageExpandableCardView extends FrameLayout {
 
     private boolean mAnimating;
 
-    public HomageExpandableCardView(@NonNull Context context) {
+    public HomageExpandableView(@NonNull Context context) {
         this(context, null);
     }
 
-    public HomageExpandableCardView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public HomageExpandableView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public HomageExpandableCardView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public HomageExpandableView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         View.inflate(context, R.layout.homage_expandable_card_view, this);
         mCollapsedStub = (ViewStub) findViewById(R.id.homage_expandable_card_view_collapsed_stub);
