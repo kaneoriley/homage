@@ -18,26 +18,28 @@ package me.oriley.homage.recyclerview;
 
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import me.oriley.homage.Homage;
 
-public class HomageAdapter extends HomageAdapterBase {
+public class HomageCardAdapter extends HomageAdapterBase {
 
-    public HomageAdapter(@NonNull Homage homage, @NonNull HomageView.ExtraInfoMode extraInfoMode, boolean showIcons) {
+    public HomageCardAdapter(@NonNull Homage homage, @NonNull HomageView.ExtraInfoMode extraInfoMode, boolean showIcons) {
         super(homage, extraInfoMode, showIcons);
     }
 
-    public HomageAdapter(@NonNull Homage homage, @NonNull HomageView.ExtraInfoMode extraInfoMode, boolean showIcons, boolean dark) {
+    public HomageCardAdapter(@NonNull Homage homage, @NonNull HomageView.ExtraInfoMode extraInfoMode, boolean showIcons, boolean dark) {
         super(homage, extraInfoMode, showIcons, dark);
     }
 
     @Override
     public HomageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        HomageView view = (HomageView) LayoutInflater.from(parent.getContext())
-                .inflate(mDark ? R.layout.homage_recycler_item_dark : R.layout.homage_recycler_item_light, parent, false);
-        view.setExtraInfoMode(mExtraInfoMode);
-        view.setShowIcons(mShowIcons);
-        return new HomageViewHolder(view, view);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(mDark ? R.layout.homage_recycler_card_dark : R.layout.homage_recycler_card_light, parent, false);
+        HomageView homage = (HomageView) view.findViewById(R.id.homage_view);
+        homage.setExtraInfoMode(mExtraInfoMode);
+        homage.setShowIcons(mShowIcons);
+        return new HomageViewHolder(view, homage);
     }
 }
