@@ -36,7 +36,7 @@ import static me.oriley.homage.utils.ObjectUtils.validateNonNull;
 import static me.oriley.homage.utils.StringUtils.nullToEmpty;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-public class HomageView extends HomageExpandableCardView {
+public class HomageView extends HomageExpandableView {
 
     public enum ExtraInfoMode {
         EXPANDABLE, POPUP

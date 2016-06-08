@@ -20,17 +20,17 @@ import android.support.annotation.NonNull;
 
 import me.oriley.homage.Homage;
 import me.oriley.homage.Library;
-import me.oriley.homage.recyclerview.HomageAdapter;
+import me.oriley.homage.recyclerview.HomageCardAdapter;
 import me.oriley.homage.recyclerview.HomageView.ExtraInfoMode;
 
-class HomageInfiniteAdapter extends HomageAdapter {
+class HomageInfiniteCardAdapter extends HomageCardAdapter {
 
-    HomageInfiniteAdapter(@NonNull Homage homage, @NonNull ExtraInfoMode extraInfoMode, boolean showIcons) {
+    HomageInfiniteCardAdapter(@NonNull Homage homage, @NonNull ExtraInfoMode extraInfoMode, boolean showIcons) {
         this(homage, extraInfoMode, showIcons, false);
     }
 
-    HomageInfiniteAdapter(@NonNull Homage homage, @NonNull ExtraInfoMode extraInfoMode, boolean showIcons,
-                          boolean dark) {
+    HomageInfiniteCardAdapter(@NonNull Homage homage, @NonNull ExtraInfoMode extraInfoMode, boolean showIcons,
+                              boolean dark) {
         super(homage, extraInfoMode, showIcons, dark);
     }
 

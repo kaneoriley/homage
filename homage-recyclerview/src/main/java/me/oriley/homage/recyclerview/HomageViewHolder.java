@@ -28,12 +28,10 @@ public class HomageViewHolder extends RecyclerView.ViewHolder {
     @NonNull
     private final HomageView mLibraryView;
 
-
-    public HomageViewHolder(@NonNull HomageView view) {
+    public HomageViewHolder(View view, @NonNull HomageView homage) {
         super(view);
-        mLibraryView = view;
+        mLibraryView = homage;
     }
-
 
     @NonNull
     public HomageView getLibraryView() {
