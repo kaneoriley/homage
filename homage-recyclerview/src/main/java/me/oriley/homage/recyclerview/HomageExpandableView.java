@@ -53,6 +53,7 @@ public abstract class HomageExpandableView extends FrameLayout {
 
     private boolean mAnimating;
 
+
     public HomageExpandableView(@NonNull Context context) {
         this(context, null);
     }
@@ -70,6 +71,7 @@ public abstract class HomageExpandableView extends FrameLayout {
         mCollapsedView = mCollapsedStub;
         mExpandedView = mExpandedStub;
     }
+
 
     protected void setCollapsedLayoutResource(@LayoutRes int layoutResource) {
         if (mCollapsedStub.getLayoutResource() != layoutResource) {
@@ -174,6 +176,7 @@ public abstract class HomageExpandableView extends FrameLayout {
     }
 
     protected void onExpandedAnimationUpdate(float level) {
+        // Override if necessary
     }
 
     protected void updateTextView(@NonNull TextView view, @Nullable Spanned text) {

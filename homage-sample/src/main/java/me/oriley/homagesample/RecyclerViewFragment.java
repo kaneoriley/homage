@@ -33,7 +33,7 @@ abstract class RecyclerViewFragment extends Fragment {
     private static final String KEY_LAYOUT_MANAGER_STATE = "layoutManagerState";
 
     @NonNull
-    protected RecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
 
     @Nullable
     private RecyclerView.Adapter mAdapter;

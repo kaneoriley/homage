@@ -25,6 +25,7 @@ import me.oriley.homage.Homage;
 
 public class HomageCardAdapter extends HomageAdapterBase {
 
+
     public HomageCardAdapter(@NonNull Homage homage, @NonNull HomageView.ExtraInfoMode extraInfoMode, boolean showIcons) {
         super(homage, extraInfoMode, showIcons);
     }
@@ -32,6 +33,7 @@ public class HomageCardAdapter extends HomageAdapterBase {
     public HomageCardAdapter(@NonNull Homage homage, @NonNull HomageView.ExtraInfoMode extraInfoMode, boolean showIcons, boolean dark) {
         super(homage, extraInfoMode, showIcons, dark);
     }
+
 
     @Override
     public HomageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

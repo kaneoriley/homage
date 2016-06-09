@@ -20,6 +20,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,17 +29,19 @@ import android.view.View;
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
-    int mOrientation = -1;
-    private Drawable mDivider;
+    @Nullable
+    private final Drawable mDivider;
 
-    public DividerItemDecoration(Context context, boolean darkMode) {
+    private int mOrientation = -1;
+
+
+    public DividerItemDecoration(@NonNull Context context, boolean darkMode) {
         int divider = darkMode ? R.drawable.homage_divider_dark : R.drawable.homage_divider_light;
         mDivider = ContextCompat.getDrawable(context, divider);
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
-                               RecyclerView.State state) {
+    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         if (mDivider == null) {
             return;
@@ -48,8 +52,9 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             return;
         }
 
-        if (mOrientation == -1)
+        if (mOrientation == -1) {
             getOrientation(parent);
+        }
 
         if (mOrientation == LinearLayoutManager.VERTICAL) {
             outRect.top = mDivider.getIntrinsicHeight();
@@ -96,7 +101,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    private int getOrientation(RecyclerView parent) {
+    private int getOrientation(@NonNull RecyclerView parent) {
         if (mOrientation == -1) {
             if (parent.getLayoutManager() instanceof LinearLayoutManager) {
                 LinearLayoutManager layoutManager = (LinearLayoutManager) parent.getLayoutManager();

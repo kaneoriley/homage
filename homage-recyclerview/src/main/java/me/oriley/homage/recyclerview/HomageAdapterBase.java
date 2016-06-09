@@ -32,13 +32,16 @@ abstract class HomageAdapterBase extends RecyclerView.Adapter<HomageViewHolder> 
     @NonNull
     protected final Homage mHomage;
 
+    @NonNull
     protected final List<Library> mLibraries;
 
+    @NonNull
     protected final ExtraInfoMode mExtraInfoMode;
 
     protected final boolean mShowIcons;
 
     protected final boolean mDark;
+
 
     public HomageAdapterBase(@NonNull Homage homage, @NonNull ExtraInfoMode extraInfoMode, boolean showIcons) {
         this(homage, extraInfoMode, showIcons, false);
@@ -51,6 +54,7 @@ abstract class HomageAdapterBase extends RecyclerView.Adapter<HomageViewHolder> 
         mShowIcons = showIcons;
         mDark = dark;
     }
+
 
     @Override
     public void onBindViewHolder(final HomageViewHolder holder, int position) {
