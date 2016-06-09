@@ -23,7 +23,7 @@ import me.oriley.homage.Homage;
 import me.oriley.homage.recyclerview.HomageView;
 
 @SuppressWarnings("WeakerAccess")
-public final class PopupFragment extends RecyclerViewFragment {
+public final class PopupCardFragment extends RecyclerViewFragment {
 
     @NonNull
     @Override
@@ -34,7 +34,7 @@ public final class PopupFragment extends RecyclerViewFragment {
         homage.addLicense("oriley", R.string.license_oriley_name, R.string.license_oriley_url, R.string.license_oriley_description);
         homage.refreshLibraries();
 
-        return new HomageInfiniteAdapter(homage, HomageView.ExtraInfoMode.POPUP, false);
+        return new HomageInfiniteCardAdapter(homage, HomageView.ExtraInfoMode.POPUP, false);
     }
 
     @NonNull
