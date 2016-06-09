@@ -102,6 +102,9 @@ HomageAdapter homageAdapter = new HomageAdapter(mHomage, HomageView.ExtraInfoMod
 HomageAdapter homageAdapter = new HomageAdapter(mHomage, HomageView.ExtraInfoMode.POPUP, true, true);
 ```
 
+By default the items fill the `RecyclerView` and have a line divider between them. If you'd like to use card based
+entries, replace `HomageAdapter` with `HomageCardAdapter`.
+
 Now all you need is a `RecyclerView` to set the adapter to:
 
 ```java
@@ -184,10 +187,10 @@ repositories {
 ```gradle
 dependencies {
     // Required
-    compile 'com.github.oriley-me.homage:homage-core:0.1.2'
+    compile 'com.github.oriley-me.homage:homage-core:0.2.0'
 
     // Optional, only needed if you want to use the included widgets instead of rolling your own
-    compile 'com.github.oriley-me.homage:homage-recyclerview:0.1.2'
+    compile 'com.github.oriley-me.homage:homage-recyclerview:0.2.0'
 }
 ```
 

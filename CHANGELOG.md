@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## Version 0.2.0
+
+_2016-06-09_
+
+ *  Add support for non-Card based adapters in recyclerview module (thanks DreierF)
+ *  API change: HomageAdapter is now non-Card based. Use HomageCardAdapter for the card based style.
+
 ## Version 0.1.2
 
 _2016-05-11_
