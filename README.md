@@ -3,8 +3,8 @@
 [![Build Status](https://travis-ci.org/oriley-me/homage.svg?branch=master)](https://travis-ci.org/oriley-me/homage)
 [![Dependency Status](https://www.versioneye.com/user/projects/570cea97fcd19a00518553df/badge.svg?style=flat)](https://www.versioneye.com/user/projects/570cea97fcd19a00518553df)<br/>
 
-<a href="http://www.methodscount.com/?lib=me.oriley.homage%3Ahomage-core%3A0.1.2"><img src="https://img.shields.io/badge/homage_core-methods: 128 | deps: 20 | size: 20 KB-f44336.svg"></img></a><br/>
-<a href="http://www.methodscount.com/?lib=me.oriley.homage%3Ahomage-recyclerview%3A0.1.2"><img src="https://img.shields.io/badge/homage_recyclerview-methods: 161 | deps: 11815 | size: 20 KB-ff9800.svg"></img></a>
+<a href="http://www.methodscount.com/?lib=me.oriley.homage%3Ahomage-core%3A0.2.0"><img src="https://img.shields.io/badge/homage_core-methods: 128 | deps: 20 | size: 20 KB-f44336.svg"></img></a><br/>
+<a href="http://www.methodscount.com/?lib=me.oriley.homage%3Ahomage-recyclerview%3A0.2.0"><img src="https://img.shields.io/badge/homage_recyclerview-methods: 199 | deps: 11815 | size: 24 KB-ff9800.svg"></img></a>
 
 # Homage
 ![Logo](artwork/icon.png)
